@@ -1,0 +1,72 @@
+﻿{
+    "CaboDaRoca": {
+        "title": "Cabo da Roca",
+        "date": "2024-04-07T00:00:00",
+        "cover": "images/collections/CaboDaRoca/CaboDaRoca-9277.jpg"
+    },
+    "CampingCostaVicentina2025": {
+        "title": "Costa Vicentina Camping",
+        "date": "2025-08-02T00:00:00",
+        "cover": "images/collections/CampingCostaVicentina2025/_DSC4149_Camping25.jpg"
+    },
+    "Cruise Norway 2024": {
+        "title": "Norway Cruise",
+        "date": "2024-08-08T00:00:00",
+        "cover": "images/collections/Cruise Norway 2024/Cruzeiro2024-3150.jpg"
+    },
+    "EditedPasseioGracaBelem": {
+        "title": "Passeio GraÃ§a & BelÃ©m",
+        "date": "2024-09-26T00:00:00",
+        "cover": "images/collections/EditedPasseioGracaBelem/GracaBelem-3905.jpg"
+    },
+    "EditedRome": {
+        "title": "Rome Recollections",
+        "date": "2025-01-03T00:00:00",
+        "cover": "images/collections/EditedRome/Rome-5802.jpg"
+    },
+    "edited_passeio_02_06_2024": {
+        "title": "Lisbon Walk (June 2024)",
+        "date": "2024-06-02T00:00:00",
+        "cover": "images/collections/edited_passeio_02_06_2024/random-0681.jpg"
+    },
+    "FotitasPasseiosAina": {
+        "title": "Aina",
+        "date": "2024-03-30T00:00:00",
+        "cover": "images/collections/FotitasPasseiosAina/Aina-8698.jpg"
+    },
+    "jun25": {
+        "title": "June 2025",
+        "date": "2025-07-07T00:00:00",
+        "cover": "images/collections/jun25/_DSC2022_Jun25.jpg"
+    },
+    "London": {
+        "title": "London Streets",
+        "date": "2023-11-06T00:00:00",
+        "cover": "images/collections/London/London_DSC6514.jpg"
+    },
+    "LostFiles_until_May2026": {
+        "title": "Lost Files (2026)",
+        "date": "2026-04-30T00:00:00",
+        "cover": "images/collections/LostFiles_until_May2026/_DSC2413_Lost2026.jpg"
+    },
+    "Pariris": {
+        "title": "Paris: Collection I",
+        "date": "2025-09-13T00:00:00",
+        "cover": "images/collections/Pariris/_DSC5286_Pariris.jpg"
+    },
+    "Pariris2": {
+        "title": "Paris: Collection II",
+        "date": "2025-11-09T00:00:00",
+        "cover": "images/collections/Pariris2/_DSC7154_Pariris2.jpg"
+    },
+    "PasseioSofia": {
+        "title": "Sofia",
+        "date": "2024-05-06T00:00:00",
+        "cover": "images/collections/PasseioSofia/PasseioSofia-9552.jpg"
+    },
+    "Random": {
+        "title": "Random Moments",
+        "date": "2024-05-12T00:00:00",
+        "cover": "images/collections/Random/VW-9582.jpg"
+    }
+}

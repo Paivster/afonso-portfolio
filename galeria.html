@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Afonso Photography - Explore different photography collections, portfolios, and albums. Fine art prints available for order.">
+    <title>Coleções | Afonso Photography</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Floating Glassmorphic Header Navigation -->
+    <header class="header-nav" id="main-header">
+        <a href="index.html" class="logo" id="logo-branding">Afonso Paiva<span>.</span></a>
+        
+        <nav aria-label="Navegação Principal">
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="galeria.html" id="nav-portfolio">Portefólio</a></li>
+                <li><a href="#loja" id="nav-loja">Loja</a></li>
+                <li><a href="sobre.html" id="nav-sobre">Sobre Mim</a></li>
+            </ul>
+        </nav>
+
+        <button class="mobile-nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <section class="gallery-section" id="gallery-container">
+            <div class="container">
+                
+                <!-- Controls (Sorting) -->
+                <div class="controls-container" id="gallery-controls">
+                    <span class="sort-label">Ordenar por:</span>
+                    <select class="sort-select" id="catalog-sort-select">
+                        <option value="date-desc" selected>Data da Coleção (Mais Recentes)</option>
+                        <option value="date-asc">Data da Coleção (Mais Antigas)</option>
+                        <option value="name-asc">Nome (A - Z)</option>
+                        <option value="name-desc">Nome (Z - A)</option>
+                        <option value="size-desc">Tamanho (Mais Fotos)</option>
+                        <option value="size-asc">Tamanho (Menos Fotos)</option>
+                    </select>
+                </div>
+
+                <!-- Collections Catalog Grid -->
+                <div class="gallery-mosaic" id="collections-grid">
+                    <!-- RENDERED DYNAMICALLY BY JAVASCRIPT -->
+                    <div style="text-align: center; grid-column: 1 / -1; padding: 3rem; color: var(--text-secondary);">
+                        A carregar coleções...
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Database and Script Logic -->
+    <script src="js/collections-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

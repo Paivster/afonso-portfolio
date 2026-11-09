@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gestão | Afonso Photography</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-section {
+            padding-top: 8rem;
+            padding-bottom: 6rem;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title {
+            font-family: var(--font-heading);
+            font-size: 2.25rem;
+            font-weight: 300;
+        }
+
+        .btn-save {
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-save:hover {
+            background-color: transparent;
+            color: var(--text-primary);
+        }
+
+        .collections-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .collection-row {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .col-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .col-preview-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+        }
+
+        .col-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .col-span-2 {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+
+        .form-input, .form-select {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--text-primary);
+        }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .collection-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .col-preview {
+                width: 150px;
+            }
+            .col-fields {
+                grid-template-columns: 1fr;
+            }
+            .col-span-2 {
+                grid-column: span 1;
+            }
+        }
+
+        /* Modal Overlay & Box styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 400;
+        }
+
+        .modal-close-btn {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.75rem;
+            overflow-y: auto;
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .modal-photo-item {
+            aspect-ratio: 1;
+            width: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all var(--transition-fast);
+        }
+
+        .modal-photo-item:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        .modal-photo-item.active {
+            border-color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Navigation Bar -->
+    <header class="header-nav" id="main-header" style="z-index: 10000;">
+        <a href="index.html" class="logo" id="logo-branding">Afonso Paiva<span>.</span></a>
+        <nav aria-label="Navegação Principal">
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="galeria.html">Portefólio</a></li>
+                <li><a href="admin.html" class="active">Gestão</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="admin-section">
+            <div class="admin-header">
+                <div>
+                    <h1 class="admin-title">Painel de Gestão</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.25rem;">
+                        Altere os nomes, datas e fotos de capa das suas coleções fotográficas.
+                    </p>
+                </div>
+                <button type="button" class="btn-save" onclick="saveCMSConfig()">Guardar Alterações</button>
+            </div>
+
+            <!-- List of Collections to Edit -->
+            <div class="collections-list" id="collections-edit-container">
+                <div style="color: var(--text-secondary); text-align: center; padding: 4rem;">
+                    A carregar coleções...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cover Photo Selector Modal Window -->
+    <div id="cover-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title">Selecionar Foto Principal</h3>
+                <button type="button" class="modal-close-btn" onclick="closeCoverSelector()">&times;</button>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 0.5rem;">
+                Escolha uma imagem da coleção <span id="modal-col-title" style="color: var(--text-primary); font-weight: 500;"></span>:
+            </p>
+            <div class="modal-grid" id="modal-photos-grid">
+                <!-- Dynamically populated grid of collection images -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Success Notification -->
+    <div id="toast" class="toast-notification">
+        Configurações guardadas e base de dados atualizada!
+    </div>
+
+    <!-- Data registry -->
+    <script src="js/collections-data.js"></script>
+    <script>
+        let currentOverrides = {};
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load custom metadata overrides if any
+            try {
+                const response = await fetch('js/custom-metadata.json', { cache: 'no-cache' });
+                if (response.ok) {
+                    currentOverrides = await response.json();
+                }
+            } catch (e) {
+                console.log("Nenhum ficheiro custom-metadata.json detetado ainda.");
+            }
+
+            renderCollectionsEditor();
+        });
+
+        function renderCollectionsEditor() {
+            const container = document.getElementById('collections-edit-container');
+            if (!container) return;
+
+            if (typeof collectionsData === 'undefined' || Object.keys(collectionsData).length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 4rem;">
+                        Nenhuma coleção encontrada na base de dados.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            const keys = Object.keys(collectionsData);
+
+            keys.forEach(key => {
+                const col = collectionsData[key];
+                const override = currentOverrides[key] || {};
+                
+                // Set initial values
+                const currentTitle = override.title || col.title;
+                const currentCover = override.cover || col.cover;
+                
+                // Format date for the input element (YYYY-MM-DD)
+                const dateObj = new Date(override.date || col.date);
+                const year = dateObj.getFullYear();
+                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const currentISODate = `${year}-${month}-${day}`;
+
+                // Build photos options for the cover selection visual picker
+                let thumbnailPickerHtml = '';
+                col.photos.forEach(photo => {
+                    const isActive = photo.path === currentCover ? 'active' : '';
+                    thumbnailPickerHtml += `
+                        <img src="${photo.path}" 
+                             alt="Foto da colecao" 
+                             class="thumbnail-picker-item ${isActive}" 
+                             onclick="selectCoverThumbnail('${col.id}', '${photo.path}', this)"
+                             loading="lazy">
+                    `;
+                });
+
+                html += `
+                    <div class="collection-row" data-id="${col.id}">
+                        <div class="col-preview">
+                            <span class="form-label" style="text-align: center;">Foto de Capa</span>
+                            <img src="${currentCover}" alt="Cover preview" class="col-preview-img" id="preview-${col.id}">
+                            <span style="font-size: 10px; color: var(--text-secondary); text-align: center; font-family: monospace;">
+                                id: ${col.id}
+                            </span>
+                        </div>
+                        
+                        <div class="col-fields">
+                            <!-- Title Input -->
+                            <div class="form-group col-span-2">
+                                <label class="form-label" for="title-${col.id}">Nome da Coleção</label>
+                                <input type="text" class="form-input" id="title-${col.id}" value="${currentTitle}" placeholder="Insira o nome da coleção">
+                            </div>
+
+                            <!-- Date Picker -->
+                            <div class="form-group">
+                                <label class="form-label" for="date-${col.id}">Data da Coleção</label>
+                                <input type="date" class="form-input" id="date-${col.id}" value="${currentISODate}">
+                            </div>
+
+                            <!-- Cover Image Picker Trigger Button -->
+                            <div class="form-group">
+                                <label class="form-label">Selecionar Foto Principal</label>
+                                <input type="hidden" id="cover-${col.id}" value="${currentCover}">
+                                <button type="button" class="form-input" style="cursor: pointer; text-align: center; font-weight: 500;" onclick="openCoverSelector('${col.id}')">
+                                    Escolher Imagem...
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        let activeEditingColId = null;
+
+        // Open modal cover selector and populate dynamic grid
+        function openCoverSelector(colId) {
+            activeEditingColId = colId;
+            const col = collectionsData[colId];
+            if (!col) return;
+
+            document.getElementById('modal-col-title').textContent = col.title;
+            const grid = document.getElementById('modal-photos-grid');
+            const currentCover = document.getElementById(`cover-${colId}`).value;
+
+            let gridHtml = '';
+            col.photos.forEach(photo => {
+                const isActive = photo.path === currentCover ? 'active' : '';
+                gridHtml += `
+                    <img src="${photo.path}" 
+                         alt="Foto da colecao" 
+                         class="modal-photo-item ${isActive}" 
+                         onclick="selectCoverThumbnail('${photo.path}', this)"
+                         loading="lazy">
+                `;
+            });
+
+            grid.innerHTML = gridHtml;
+            document.getElementById('cover-modal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeCoverSelector() {
+            document.getElementById('cover-modal').style.display = 'none';
+        }
+
+        // Update selected cover image dynamically
+        function selectCoverThumbnail(photoPath, element) {
+            if (!activeEditingColId) return;
+
+            const input = document.getElementById(`cover-${activeEditingColId}`);
+            const img = document.getElementById(`preview-${activeEditingColId}`);
+            if (input && img) {
+                input.value = photoPath;
+                img.src = photoPath;
+            }
+            closeCoverSelector();
+        }
+
+        // Build overrides payload and post to the PowerShell server API
+        async function saveCMSConfig() {
+            const container = document.getElementById('collections-edit-container');
+            const rows = container.querySelectorAll('.collection-row');
+            const newOverrides = {};
+
+            rows.forEach(row => {
+                const colId = row.dataset.id;
+                const titleInput = document.getElementById(`title-${colId}`);
+                const dateInput = document.getElementById(`date-${colId}`);
+                const coverSelect = document.getElementById(`cover-${colId}`);
+
+                if (titleInput && dateInput && coverSelect) {
+                    // Assemble override object
+                    newOverrides[colId] = {
+                        title: titleInput.value.trim(),
+                        date: new Date(dateInput.value).toISOString().substring(0, 19), // Format: YYYY-MM-DDTHH:mm:ss
+                        cover: coverSelect.value
+                    };
+                }
+            });
+
+            // Post override config to Server API
+            try {
+                const response = await fetch('/api/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newOverrides, null, 4)
+                });
+
+                if (response.ok) {
+                    showToast();
+                    
+                    // Reload data from regenerated collectionsData after brief delay
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    alert('Erro ao guardar as alterações. Detalhes no servidor.');
+                }
+            } catch (err) {
+                alert('Erro ao ligar ao servidor local: ' + err.message);
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

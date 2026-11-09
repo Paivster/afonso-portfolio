@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Afonso Paiva — Portefólio interativo 3D. Fotografia, gear, e muito mais.">
+    <title>Afonso Paiva | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── 3D Canvas ─────────────────────────────── */
+        #room-3d-container {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: #1a1a1a;
+            cursor: grab;
+        }
+        #room-3d-container:active { cursor: grabbing; }
+
+        /* ── Loading screen ────────────────────────── */
+        #room-loader {
+            position: fixed;
+            inset: 0;
+            background: #1a1a1a;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: opacity 0.6s ease;
+        }
+        #room-loader .loader-bar-track {
+            width: 160px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        #room-loader .loader-bar-fill {
+            height: 100%;
+            background: #ffffff;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        #loader-progress { color: var(--text-primary); font-size: 0.7rem; }
+
+        /* ── UI overlay — centered at bottom, above the spot switcher ── */
+        .homepage-ui {
+            position: fixed;
+            bottom: 5.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.4s ease;
+        }
+        .homepage-ui * { pointer-events: auto; }
+
+        .hero-title-room {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.95);
+            pointer-events: none;
+            line-height: 1.5;
+            opacity: 0.75;
+        }
+        .hero-title-room span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-top: 0.3rem;
+            opacity: 0.5;
+        }
+
+        .gallery-fallback-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 20;
+            background: rgba(20,20,20,0.6);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text-secondary);
+            padding: 0.55rem 1.1rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(6px);
+        }
+        .gallery-fallback-btn:hover {
+            color: var(--text-primary);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* ── Panel overlay backdrop ─────────────────── */
+        #panel-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        #panel-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ── Sticky-note style info panels ─────────── */
+        .info-panel {
+            position: fixed;
+            z-index: 600;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -48%) rotate(-1deg) scale(0.93);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+
+            width: min(520px, 90vw);
+            max-height: 85vh;
+            overflow-y: auto;
+            background: #f5f0e8;
+            border-radius: 2px;
+            padding: 3rem 3rem 2.5rem;
+            box-shadow:
+                0 2px 0 #d4cfc7,
+                0 4px 0 #c9c4bc,
+                0 20px 60px rgba(0,0,0,0.55),
+                0 40px 80px rgba(0,0,0,0.3);
+
+            /* Tape strip at top */
+            overflow: visible;
+        }
+        /* Tape strip pseudo-element */
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 80px;
+            height: 36px;
+            background: rgba(255, 240, 180, 0.7);
+            border-radius: 2px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .info-panel.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) rotate(-0.5deg) scale(1);
+        }
+
+        /* Panel typography — dark ink on paper */
+        .info-panel h2 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+        .info-panel .panel-sub {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.8rem;
+        }
+        .info-panel p, .info-panel li {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.7;
+        }
+        .info-panel ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem;
+        }
+        .info-panel ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .info-panel ul li:last-child { border-bottom: none; }
+        .info-panel .gear-badge {
+            font-size: 0.7rem;
+            background: #1a1a1a;
+            color: #f5f0e8;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+        }
+        .info-panel .panel-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .info-panel .panel-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.2rem;
+            background: #1a1a1a;
+            color: #f5f0e8;
+            border-radius: 3px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: background 0.2s ease;
+        }
+        .info-panel .panel-link-btn:hover { background: #333; }
+
+        /* Close button */
+        .panel-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+            font-family: sans-serif;
+        }
+        .panel-close:hover { color: #1a1a1a; }
+
+        /* Horizontal divider inside panel */
+        .panel-divider {
+            width: 40px;
+            height: 2px;
+            background: #1a1a1a;
+            margin: 0 0 1.5rem;
+            opacity: 0.2;
+        }
+
+        /* ── Viewpoint Switcher (Google Street View style) ── */
+        .viewpoint-switcher {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 0.4rem;
+            background: rgba(18, 18, 18, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.35rem 0.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+        .viewpoint-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.45rem 1.1rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .viewpoint-btn:hover {
+            color: var(--text-primary);
+        }
+        .viewpoint-btn.active {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+        .viewpoint-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            transition: all 0.25s ease;
+        }
+        .viewpoint-btn.active .viewpoint-dot {
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="room-loader">
+        <span>A carregar a sala</span>
+        <div class="loader-bar-track">
+            <div class="loader-bar-fill" id="loader-bar"></div>
+        </div>
+        <span id="loader-progress">0%</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="header-nav" id="main-header" style="z-index: 10000;">
+        <a href="index.html" class="logo" id="logo-branding">Afonso Paiva<span>.</span></a>
+        <nav aria-label="Navegação Principal">
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="galeria.html" id="nav-portfolio">Portefólio</a></li>
+                <li><a href="#loja" id="nav-loja">Loja</a></li>
+                <li><a href="sobre.html" id="nav-sobre">Sobre Mim</a></li>
+            </ul>
+        </nav>
+        <button class="mobile-nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- 3D Room Canvas -->
+    <div id="room-3d-container"></div>
+
+    <!-- UI Overlay — centered ambient hint -->
+    <main class="homepage-ui" id="homepage-ui">
+        <p class="hero-title-room">
+            Arrasta para olhar 360°
+            <span id="room-hint-text">Explora a sala e clica nos detalhes</span>
+        </p>
+    </main>
+
+    <!-- Flat catalog fallback -->
+    <a href="galeria.html" class="gallery-fallback-btn">Ver Portefólio</a>
+
+    <!-- ── Viewpoint Switcher (Google Street View 2-Spot navigation) ── -->
+    <div class="viewpoint-switcher" id="viewpoint-switcher" aria-label="Mudar de ponto de vista">
+        <button class="viewpoint-btn active" data-spot="desk" onclick="switchSpot('desk')">
+            <span class="viewpoint-dot"></span> Secretária
+        </button>
+        <button class="viewpoint-btn" data-spot="sofa" onclick="switchSpot('sofa')">
+            <span class="viewpoint-dot"></span> Sofá
+        </button>
+    </div>
+
+    <!-- ── Panel Overlay Backdrop ──────────────────── -->
+    <div id="panel-overlay" onclick="closeAllPanels()"></div>
+
+    <!-- ── About / CV Panel ────────────────────────── -->
+    <div class="info-panel" id="panel-about">
+        <button class="panel-close" onclick="closeAllPanels()" aria-label="Fechar">✕</button>
+        <h2>Afonso Paiva</h2>
+        <p class="panel-sub">Sobre mim</p>
+        <div class="panel-divider"></div>
+        <p>
+            Olá! Sou o Afonso — fotógrafo, estudante e criativo baseado em Portugal.
+            Apaixonado por capturar momentos, explorar lugares e contar histórias através da imagem.
+        </p>
+        <div class="panel-links">
+            <a class="panel-link-btn" href="sobre.html" style="background:#000; color:#fff;">
+                Ver Página Completa ↗
+            </a>
+            <a class="panel-link-btn" href="#" target="_blank" rel="noopener">
+                ↓ Descarregar CV
+            </a>
+            <a class="panel-link-btn" href="https://instagram.com/" target="_blank" rel="noopener">
+                Instagram
+            </a>
+            <a class="panel-link-btn" href="https://linkedin.com/" target="_blank" rel="noopener">
+                LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <!-- ── Gear Panel ───────────────────────────────── -->
+    <div class="info-panel" id="panel-gear">
+        <button class="panel-close" onclick="closeAllPanels()" aria-label="Fechar">✕</button>
+        <h2>O Meu Gear</h2>
+        <p class="panel-sub">Equipamento fotográfico</p>
+        <div class="panel-divider"></div>
+        <ul>
+            <li>
+                Câmara principal
+                <span class="gear-badge">Em breve</span>
+            </li>
+            <li>
+                Objetiva principal
+                <span class="gear-badge">Em breve</span>
+            </li>
+            <li>
+                Objetiva secundária
+                <span class="gear-badge">Em breve</span>
+            </li>
+            <li>
+                Edição
+                <span class="gear-badge">Lightroom + Photoshop</span>
+            </li>
+            <li>
+                3D / Motion
+                <span class="gear-badge">Blender</span>
+            </li>
+        </ul>
+        <p style="font-size:0.8rem; color:#999; margin-top:0.5rem;">
+            Podes editar este painel no ficheiro <code>index.html</code>.
+        </p>
+    </div>
+
+    <!-- ── Social Links Panel ────────────────────────── -->
+    <div class="info-panel" id="panel-social">
+        <button class="panel-close" onclick="closeAllPanels()" aria-label="Fechar">✕</button>
+        <h2>Redes &amp; Links</h2>
+        <p class="panel-sub">Onde me encontrar</p>
+        <div class="panel-divider"></div>
+        <ul>
+            <li>
+                <div>
+                    <strong>Instagram</strong>
+                    <div style="font-size:0.8rem; color:#666;">Fotografia, histórias &amp; dia a dia</div>
+                </div>
+                <a class="panel-link-btn" href="https://instagram.com/" target="_blank" rel="noopener">Abrir ↗</a>
+            </li>
+            <li>
+                <div>
+                    <strong>LinkedIn</strong>
+                    <div style="font-size:0.8rem; color:#666;">Perfil profissional &amp; percurso</div>
+                </div>
+                <a class="panel-link-btn" href="https://linkedin.com/" target="_blank" rel="noopener">Abrir ↗</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Spotify</strong>
+                    <div style="font-size:0.8rem; color:#666;">Playlists &amp; inspiração sonora</div>
+                </div>
+                <a class="panel-link-btn" href="https://open.spotify.com/user/1188973573?si=71e579738e2c4d2b" target="_blank" rel="noopener">Ouvir ↗</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Letterboxd</strong>
+                    <div style="font-size:0.8rem; color:#666;">Cinema, referências visuais &amp; estética</div>
+                </div>
+                <a class="panel-link-btn" href="https://letterboxd.com/afonsopaiva" target="_blank" rel="noopener">Ver ↗</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Email Direto</strong>
+                    <div style="font-size:0.8rem; color:#666;">Projetos, trabalhos &amp; colaborações</div>
+                </div>
+                <a class="panel-link-btn" href="mailto:contacto@afonsopaiva.com">Contacto ✉</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ── CV & Academic Work Panel ──────────────────── -->
+    <div class="info-panel" id="panel-cv">
+        <button class="panel-close" onclick="closeAllPanels()" aria-label="Fechar">✕</button>
+        <h2>CV &amp; Trabalhos</h2>
+        <p class="panel-sub">Percurso académico &amp; projetos</p>
+        <div class="panel-divider"></div>
+        <p style="margin-bottom: 1.2rem;">
+            Aqui encontras o meu currículo atualizado, formação académica e projetos desenvolvidos no âmbito escolar e pessoal.
+        </p>
+        <ul>
+            <li>
+                <div>
+                    <strong>Currículo Completo (CV)</strong>
+                    <div style="font-size:0.8rem; color:#666;">Histórico, competências e percurso</div>
+                </div>
+                <a class="panel-link-btn" href="#" target="_blank" rel="noopener">↓ PDF</a>
+            </li>
+            <li>
+                <div>
+                    <strong>Formação Académica</strong>
+                    <div style="font-size:0.8rem; color:#666;">Multimédia, Artes &amp; Tecnologias Visuais</div>
+                </div>
+                <span class="gear-badge">Em curso</span>
+            </li>
+            <li>
+                <div>
+                    <strong>Trabalhos &amp; Ensaios Escolares</strong>
+                    <div style="font-size:0.8rem; color:#666;">Projetos práticos de fotografia e composição</div>
+                </div>
+                <a class="panel-link-btn" href="galeria.html">Ver Obras ↗</a>
+            </li>
+            <li>
+                <div>
+                    <strong>3D &amp; Exploração Criativa</strong>
+                    <div style="font-size:0.8rem; color:#666;">Modelação Blender, iluminação Cycles &amp; Three.js</div>
+                </div>
+                <span class="gear-badge">Este Quarto 3D</span>
+            </li>
+        </ul>
+        <div class="panel-links">
+            <a class="panel-link-btn" href="galeria.html">
+                Explorar Todas as Coleções ↗
+            </a>
+        </div>
+    </div>
+
+    <!-- Three.js + GLTFLoader + Room Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="js/collections-data.js"></script>
+    <script src="js/room3d.js"></script>
+    <script>
+        // Hook progress bar to the loader element
+        const _bar = document.getElementById('loader-bar');
+        const _pct = document.getElementById('loader-progress');
+        window.__updateLoaderProgress = function(pct) {
+            if (_bar) _bar.style.width = pct + '%';
+            if (_pct) _pct.textContent  = pct + '%';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof init3DRoom === 'function') init3DRoom();
+        });
+
+        // Close panels on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllPanels();
+        });
+    </script>
+</body>
+</html>

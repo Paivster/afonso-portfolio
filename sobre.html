@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sobre Afonso Paiva — Fotógrafo, estudante e criativo visual baseado em Portugal. Conhece o meu percurso, equipamento e contactos.">
+    <title>Sobre Mim & Contactos | Afonso Paiva.</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific styles for Sobre Mim & Contactos page */
+        .about-page {
+            padding: 8rem 0 5rem;
+            min-height: 100vh;
+        }
+
+        /* Hero / Bio Grid */
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 4.5rem;
+            align-items: start;
+            margin-bottom: 5.5rem;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4 / 5;
+            filter: contrast(1.05) brightness(0.98);
+            transition: transform var(--transition-normal);
+        }
+
+        .about-image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .about-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .about-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            line-height: 1.15;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .about-lead {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-weight: 300;
+        }
+
+        .about-bio-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* Pillars / Focus areas */
+        .focus-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .focus-pill {
+            padding: 0.4rem 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+        }
+
+        /* CV & Path Section */
+        .cv-strip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 3rem;
+            margin-bottom: 5.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .cv-strip-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-strip-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 600px;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.8rem;
+            background: var(--accent);
+            color: #1a1a1a;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: transform var(--transition-fast), background var(--transition-fast);
+        }
+
+        .action-button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            color: #000;
+        }
+
+        /* Contacts & Social Section */
+        .contact-section-wrapper {
+            margin-top: 2rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .contact-header h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        /* Direct Contact Cards */
+        .social-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            transition: border-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .contact-card:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateX(4px);
+        }
+
+        .contact-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .contact-card-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .contact-card-handle {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .contact-card-arrow {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            transition: transform var(--transition-fast), color var(--transition-fast);
+        }
+
+        .contact-card:hover .contact-card-arrow {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
+
+        /* Message Form */
+        .contact-form-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+        }
+
+        .contact-form-box h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            background: var(--accent);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .form-submit-btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .about-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .cv-strip {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Glassmorphic Header Navigation -->
+    <header class="header-nav" id="main-header">
+        <a href="index.html" class="logo" id="logo-branding">Afonso Paiva<span>.</span></a>
+        
+        <nav aria-label="Navegação Principal">
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="galeria.html" id="nav-portfolio">Portefólio</a></li>
+                <li><a href="#loja" id="nav-loja">Loja</a></li>
+                <li><a href="sobre.html" class="active" id="nav-sobre">Sobre Mim</a></li>
+            </ul>
+        </nav>
+
+        <button class="mobile-nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="about-page">
+        <div class="container">
+
+            <!-- Hero Section: Portrait & Story -->
+            <section class="about-hero-grid">
+                <div class="about-image-wrapper">
+                    <img src="images/portrait.png" alt="Afonso Paiva — Fotógrafo e Criativo">
+                    <div class="about-image-caption">Afonso Paiva • Portugal</div>
+                </div>
+
+                <div class="about-content-wrapper">
+                    <span class="section-tag">Sobre Mim • Visão &amp; Percurso</span>
+                    <h1 class="about-title">Afonso Paiva<span style="color:var(--accent);">.</span></h1>
+                    <p class="about-lead">
+                        Fotógrafo, estudante e criativo visual apaixonado por capturar momentos, luzes naturais e atmosferas cinematográficas.
+                    </p>
+
+                    <div class="about-bio-text">
+                        <p>
+                            A minha jornada na fotografia começou com a curiosidade de documentar o mundo ao meu redor — desde paisagens costeiras e viagens até aos pormenores urbanos e narrativas do quotidiano.
+                        </p>
+                        <p>
+                            Para além do trabalho com câmara e edição em Lightroom e Photoshop, tenho vindo a explorar a criação de ambientes e espaços em 3D através do Blender e Three.js. Este próprio website nasceu dessa união: um portfólio onde a minha fotografia e o meu estúdio pessoal coexistem no mesmo espaço interativo.
+                        </p>
+                    </div>
+
+                    <div class="focus-pills">
+                        <span class="focus-pill">Fotografia de Paisagem</span>
+                        <span class="focus-pill">Viagem &amp; Documental</span>
+                        <span class="focus-pill">Modelação 3D &amp; Blender</span>
+                        <span class="focus-pill">Color Grading &amp; Edição</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CV & Academic Strip -->
+            <section class="cv-strip">
+                <div class="cv-strip-info">
+                    <h3>Currículo &amp; Percurso Académico</h3>
+                    <p>
+                        Consulta as minhas qualificações, histórico de estudos em multimédia e artes visuais, experiência prática e competências técnicas.
+                    </p>
+                </div>
+                <div>
+                    <a href="#" class="action-button" target="_blank" rel="noopener">
+                        ↓ Descarregar CV (PDF)
+                    </a>
+                </div>
+            </section>
+
+            <!-- Contacts & Social Section -->
+            <section class="contact-section-wrapper" id="contactos">
+                <div class="contact-header">
+                    <span class="section-tag">Vamos Colaborar</span>
+                    <h2>Contactos &amp; Redes Sociais</h2>
+                    <p>
+                        Estou disponível para projetos fotográficos, impressões fine-art, colaborações criativas ou simplesmente para trocar ideias.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- Direct Contact & Social Links -->
+                    <div class="social-cards-list">
+                        <!-- Email Card -->
+                        <a href="mailto:contacto@afonsopaiva.com" class="contact-card">
+                            <div class="contact-card-info">
+                                <span class="contact-card-name">Email Direto</span>
+                                <span class="contact-card-handle">contacto@afonsopaiva.com</span>
+                            </div>
+                            <span class="contact-card-arrow">✉</span>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-card-info">
+                                <span class="contact-card-name">Instagram</span>
+                                <span class="contact-card-handle">Fotografia diária &amp; histórias</span>
+                            </div>
+                            <span class="contact-card-arrow">↗</span>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-card-info">
+                                <span class="contact-card-name">LinkedIn</span>
+                                <span class="contact-card-handle">Perfil profissional &amp; percurso</span>
+                            </div>
+                            <span class="contact-card-arrow">↗</span>
+                        </a>
+
+                        <!-- Spotify -->
+                        <a href="https://open.spotify.com/user/1188973573?si=71e579738e2c4d2b" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-card-info">
+                                <span class="contact-card-name">Spotify</span>
+                                <span class="contact-card-handle">Playlists &amp; inspiração sonora</span>
+                            </div>
+                            <span class="contact-card-arrow">↗</span>
+                        </a>
+
+                        <!-- Letterboxd -->
+                        <a href="https://letterboxd.com/afonsopaiva" target="_blank" rel="noopener" class="contact-card">
+                            <div class="contact-card-info">
+                                <span class="contact-card-name">Letterboxd</span>
+                                <span class="contact-card-handle">Cinema &amp; referências visuais</span>
+                            </div>
+                            <span class="contact-card-arrow">↗</span>
+                        </a>
+                    </div>
+
+                    <!-- Contact Form Box -->
+                    <div class="contact-form-box">
+                        <h3>Envia uma mensagem</h3>
+                        <form onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="contact-name" class="form-label">O teu nome</label>
+                                <input type="text" id="contact-name" class="form-input" required placeholder="Ex: Maria Santos">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-email" class="form-label">O teu email</label>
+                                <input type="email" id="contact-email" class="form-input" required placeholder="exemplo@dominio.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-subject" class="form-label">Assunto</label>
+                                <input type="text" id="contact-subject" class="form-input" required placeholder="Sessão fotográfica, prints, colaboração...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message" class="form-label">Mensagem</label>
+                                <textarea id="contact-message" class="form-textarea" required placeholder="Escreve aqui a tua mensagem..."></textarea>
+                            </div>
+
+                            <button type="submit" class="form-submit-btn">Enviar Mensagem ↗</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 1rem; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.05em;">
+        Afonso Paiva. &copy; 2026 &bull; Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const subject = document.getElementById('contact-subject').value;
+            const msg = document.getElementById('contact-message').value;
+            const mailto = `mailto:contacto@afonsopaiva.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('De: ' + name + '\n\n' + msg)}`;
+            window.location.href = mailto;
+        }
+
+        // Mobile menu toggle
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navList = document.getElementById('navigation-list');
+        if (toggleBtn && navList) {
+            toggleBtn.addEventListener('click', () => {
+                navList.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

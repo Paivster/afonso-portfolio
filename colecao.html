@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore a photography collection in detail. High resolution fine art prints are available for purchase.">
+    <title>Coleção | Afonso Photography</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Extra style specifically for collection details page */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            transition: color var(--transition-fast);
+        }
+        .back-link:hover {
+            color: var(--accent);
+        }
+        .back-link svg {
+            transition: transform var(--transition-fast);
+        }
+        .back-link:hover svg {
+            transform: translateX(-4px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Glassmorphic Header Navigation -->
+    <header class="header-nav" id="main-header">
+        <a href="index.html" class="logo" id="logo-branding">Afonso Paiva<span>.</span></a>
+        
+        <nav aria-label="Navegação Principal">
+            <ul class="nav-links" id="navigation-list">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="galeria.html" id="nav-portfolio">Portefólio</a></li>
+                <li><a href="#loja" id="nav-loja">Loja</a></li>
+                <li><a href="sobre.html" id="nav-sobre">Sobre Mim</a></li>
+            </ul>
+        </nav>
+
+        <button class="mobile-nav-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <section class="gallery-section" id="collection-detail-section">
+            <div class="container">
+                
+                <!-- Back to Collections -->
+                <a href="galeria.html" class="back-link" id="back-to-gallery-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Voltar para Coleções
+                </a>
+
+                <!-- Section Header -->
+                <div class="section-header" id="collection-intro">
+                    <h1 class="section-title" id="collection-title">Carregar Coleção...</h1>
+                    <p class="section-subtitle" id="collection-subtitle">A carregar fotos...</p>
+                </div>
+
+                <!-- Controls (Sorting) -->
+                <div class="controls-container" id="collection-controls">
+                    <span class="sort-label">Ordenar por:</span>
+                    <select class="sort-select" id="photo-sort-select">
+                        <option value="date-desc">Data de Disparo (Mais Recentes)</option>
+                        <option value="date-asc">Data de Disparo (Mais Antigas)</option>
+                        <option value="name-asc">Nome do Ficheiro (A - Z)</option>
+                        <option value="name-desc">Nome do Ficheiro (Z - A)</option>
+                    </select>
+                </div>
+
+                <!-- Collection Photo Grid -->
+                <div class="gallery-mosaic" id="collection-photos-grid">
+                    <!-- RENDERED DYNAMICALLY BY JAVASCRIPT -->
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Database and Script Logic -->
+    <script src="js/collections-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

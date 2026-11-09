@@ -1,0 +1,19 @@
+# Ignore heavy 3D GLB model (over 100MB, hosted on Cloudflare R2)
+images/Quartinho.glb
+images/quartinho.glb
+*.glb
+*.psd
+
+# Ignore 3GB camera photos (hosted on Cloudflare R2)
+images/collections/
+
+# Ignore temporary backup files
+*.backup.*
+*.backup.html
+*.backup.js
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
