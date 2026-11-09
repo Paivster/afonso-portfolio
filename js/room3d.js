@@ -359,8 +359,12 @@ function loadGLB() {
     const loaderEl = document.getElementById('room-loader');
     const maxAnisotropy = renderer ? Math.min(renderer.capabilities.getMaxAnisotropy(), 8) : 4;
 
+    const modelUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'images/quartinho.glb'
+        : 'https://github.com/Paivster/afonso-portfolio/releases/download/v1.0/Quartinho.glb';
+
     loader.load(
-        'images/quartinho.glb',
+        modelUrl,
 
         (gltf) => {
             const model = gltf.scene;
