@@ -361,7 +361,7 @@ function loadGLB() {
 
     const modelUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? 'images/quartinho.glb'
-        : 'https://github.com/Paivster/afonso-portfolio/releases/download/v1.0/Quartinho.glb';
+        : 'https://rcpc1nnbrntvtunq.public.blob.vercel-storage.com/Quartinho.glb';
 
     loader.load(
         modelUrl,
