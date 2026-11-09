@@ -1,11 +1,8 @@
-# Ignore heavy 3D GLB model (over 100MB, hosted on Cloudflare R2)
+# Ignore heavy 3D GLB model (hosted on Vercel Public Blob)
 images/Quartinho.glb
 images/quartinho.glb
 *.glb
 *.psd
-
-# Ignore 3GB camera photos (hosted on Cloudflare R2)
-images/collections/
 
 # Ignore temporary backup files
 *.backup.*
