@@ -127,21 +127,11 @@ function renderCollectionsIndex() {
         return 0;
     });
 
-    // 1. Render Catalog Index with true horizontal masonry (Pinterest layout, constant spacing)
-    const getColCount = () => {
-        const w = window.innerWidth;
-        if (w <= 576) return 1;
-        if (w <= 850) return 2;
-        if (w <= 1150) return 3;
-        return 4;
-    };
-
-    const numCols = getColCount();
-    const columnsHtml = Array.from({ length: numCols }, () => []);
-
-    keys.forEach((key, index) => {
+    // Render com CSS column-count nativo (browser equilibra alturas automaticamente)
+    // Cada card tem break-inside: avoid — NUNCA parte a meio de coluna
+    grid.innerHTML = keys.map(key => {
         const col = collectionsData[key];
-        const cardHtml = `
+        return `
             <article class="collection-card" onclick="location.href='colecao.html?id=${col.id}'" id="card-${col.id}">
                 <div class="collection-card-img">
                     <img src="${col.cover}" alt="Capa da Coleção ${col.title}" loading="lazy">
@@ -155,29 +145,8 @@ function renderCollectionsIndex() {
                 </div>
             </article>
         `;
-        columnsHtml[index % numCols].push(cardHtml);
-    });
-
-    grid.innerHTML = columnsHtml.map(colCards => `
-        <div class="collections-masonry-column">
-            ${colCards.join('')}
-        </div>
-    `).join('');
-
-    if (!window._collectionsResizeBound) {
-        window._collectionsResizeBound = true;
-        let resizeTimer;
-        let lastCols = numCols;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (getColCount() !== lastCols) {
-                    lastCols = getColCount();
-                    renderCollectionsIndex();
-                }
-            }, 150);
-        });
-    }
+    }).join('');
+    // Sem necessidade de resize listener — CSS columns adapta-se via media queries
 }
 
 // 2. Render Single Collection (colecao.html)
