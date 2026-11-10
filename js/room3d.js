@@ -83,7 +83,7 @@ const LINK_MAP = {
     link_files: { type: 'overlay', panel: 'panel-cv' },
 
     // TV → Letterboxd
-    link_tv: { type: 'external', url: 'https://letterboxd.com/afonsopaiva' },
+    link_tv: { type: 'external', url: 'https://letterboxd.com/Paivster/' },
 
     // Sofa Navigation
     link_sofa:       { type: 'spot', spotId: 'sofa' },
