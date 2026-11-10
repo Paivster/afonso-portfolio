@@ -182,7 +182,7 @@ function renderSingleCollection() {
         sortSelect.addEventListener('change', renderSingleCollection);
     }
 
-    const sortBy = sortSelect ? sortSelect.value : 'date-desc';
+    const sortBy = sortSelect ? sortSelect.value : 'name-asc';
     const photosCopy = [...col.photos];
 
     // Sort photo items dynamically in the browser
