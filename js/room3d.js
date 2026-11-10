@@ -442,8 +442,8 @@ function loadGLB() {
 
         (xhr) => {
             // Se o servidor/Vercel Blob não expuser o Content-Length via CORS, xhr.total vem a 0.
-            // Usamos o tamanho real conhecido do modelo (284 MB = 284186044 bytes) como referência.
-            const total = (xhr.total && xhr.total > 0) ? xhr.total : 284186044;
+            // Usamos o tamanho real conhecido do novo modelo WebP (110.3 MB = 110323768 bytes) como referência.
+            const total = (xhr.total && xhr.total > 0) ? xhr.total : 110323768;
             const pct = Math.min(99, Math.max(1, Math.round((xhr.loaded / total) * 100)));
             if (typeof window.__updateLoaderProgress === 'function') {
                 window.__updateLoaderProgress(pct);
