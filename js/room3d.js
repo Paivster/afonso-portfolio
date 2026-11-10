@@ -430,6 +430,72 @@ function loadGLB() {
             window._linkGroups = linkGroups;
             scene.add(model);
 
+            // ─────────────────────────────────────────────────────────────────
+            // POST-LOAD MATERIAL & TEXTURE CORRECTIONS
+            // ─────────────────────────────────────────────────────────────────
+            model.traverse((node) => {
+                if (!node.isMesh) return;
+                const name = node.name || '';
+
+                // ── 1. BeerBottle: corrigir cor do vidro (fica cinzento sem envMap) ──
+                // Detectar pela mesh OU pelo nome do material (sub-meshes do grupo)
+                const nodeMats = Array.isArray(node.material) ? node.material : [node.material];
+                const hasBeerMat = nodeMats.some(m => m && (m.name || '').toLowerCase().includes('beer'));
+                if (name === 'BeerBottle' || hasBeerMat) {
+                    nodeMats.forEach(mat => {
+                        if (!mat) return;
+                        const matName = (mat.name || '').toLowerCase();
+
+                        if (matName.includes('beerglass')) {
+                            // Vidro verde escuro — desligar transmissão e simular com cor
+                            mat.color.set(0x1a3a1a);       // verde escuro
+                            mat.metalness   = 0.0;
+                            mat.roughness   = 0.08;
+                            mat.opacity     = 0.72;
+                            mat.transparent = true;
+                            mat.transmission = 0;           // desactivar transmissão física (precisa de envMap)
+                            mat.needsUpdate = true;
+                        } else if (matName.includes('beerlabel') && !matName.includes('inside')) {
+                            // Label exterior — garantir que é opaco e visível
+                            mat.transparent = false;
+                            mat.opacity     = 1.0;
+                            mat.metalness   = 0.0;
+                            mat.roughness   = 0.7;
+                            mat.needsUpdate = true;
+                        } else if (matName.includes('beercap')) {
+                            // Tampa metálica
+                            mat.metalness   = 0.8;
+                            mat.roughness   = 0.3;
+                            mat.needsUpdate = true;
+                        }
+                    });
+                }
+
+                // ── 2. link_quadroPequenoCima: foto rodada 90° ──
+                if (name.toLowerCase() === 'link_quadropequenocima') {
+                    const mats = Array.isArray(node.material) ? node.material : [node.material];
+                    mats.forEach(mat => {
+                        if (mat && mat.map) {
+                            mat.map.center.set(0.5, 0.5);
+                            mat.map.rotation = -Math.PI / 2;  // -90° (testar +90° se ficar ao contrário)
+                            mat.map.needsUpdate = true;
+                        }
+                    });
+                }
+
+                // ── 3. link_Monitor1: imagem demasiado para baixo ──
+                if (name.toLowerCase() === 'link_monitor1') {
+                    const mats = Array.isArray(node.material) ? node.material : [node.material];
+                    mats.forEach(mat => {
+                        if (mat && mat.map) {
+                            mat.map.offset.set(0, 0.18);   // subir a imagem (ajustar se necessário)
+                            mat.map.needsUpdate = true;
+                        }
+                    });
+                }
+            });
+            // ─────────────────────────────────────────────────────────────────
+
             if (typeof window.__updateLoaderProgress === 'function') {
                 window.__updateLoaderProgress(100);
             }
