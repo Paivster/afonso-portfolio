@@ -23,8 +23,10 @@ Write-Host "  Local URL:          http://localhost:$port/" -ForegroundColor Gree
 Write-Host "  To stop the server: Close this window or press Ctrl+C" -ForegroundColor Yellow
 Write-Host "=============================================" -ForegroundColor DarkYellow
 
-# Automatically open default browser
-Start-Process "http://localhost:$port/index.html"
+# Automatically open default browser if interactive
+if ([Environment]::UserInteractive) {
+    try { Start-Process "http://localhost:$port/index.html" } catch {}
+}
 
 # Serve Loop
 while ($listener.IsListening) {
@@ -34,6 +36,7 @@ while ($listener.IsListening) {
         $response = $context.Response
         
         $localPath = $request.Url.LocalPath
+        Write-Host "[$($request.HttpMethod)] $localPath"
         
         # API Handler for CMS Config updates
         if ($request.HttpMethod -eq "POST" -and $localPath -eq "/api/save-config") {

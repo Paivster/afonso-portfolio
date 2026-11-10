@@ -361,7 +361,7 @@ function loadGLB() {
     const loaderEl = document.getElementById('room-loader');
     const maxAnisotropy = renderer ? Math.min(renderer.capabilities.getMaxAnisotropy(), 8) : 4;
 
-    const modelUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    const modelUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '8000')
         ? 'images/quartinho.glb'
         : 'https://rcpc1nnbrntvtunq.public.blob.vercel-storage.com/Quartinho.glb';
 
@@ -488,7 +488,7 @@ function loadGLB() {
                             var tex = mat.emissiveMap || mat.map;
                             if (tex) {
                                 tex.center.set(0.5, 0.5);
-                                tex.rotation = -Math.PI / 2; // rodar 90 graus
+                                tex.rotation = Math.PI / 2; // rodar 90 graus (direito)
                                 tex.matrixAutoUpdate = true;
                                 tex.updateMatrix();
                                 mat.needsUpdate = true;
@@ -508,9 +508,9 @@ function loadGLB() {
                             if (mat.name === 'MainMonitorScreen' && (mat.emissiveMap || mat.map)) {
                                 var tex = mat.emissiveMap || mat.map;
                                 tex.repeat.set(3.85, 4.10);
-                                tex.rotation = -1.570796;
+                                tex.rotation = 1.570796;
                                 tex.center.set(0, 1);
-                                tex.offset.set(-4.10 + 0.35, 0.45);
+                                tex.offset.set(-4.10 + 0.15, 0.45);
                                 tex.matrixAutoUpdate = true;
                                 tex.updateMatrix();
                                 mat.needsUpdate = true;
@@ -545,7 +545,8 @@ function loadGLB() {
 
         (err) => {
             console.error('GLB load error:', err);
-            if (loaderEl) loaderEl.textContent = 'Erro ao carregar a sala 3D.';
+            const errDetail = (err && (err.message || err.statusText)) || 'Verifique a ligacao ou reinicie o servidor.';
+            if (loaderEl) loaderEl.innerHTML = '<div style="color:#ff6b6b;font-family:sans-serif;padding:2rem;text-align:center;">Erro ao carregar a sala 3D.<br><span style="font-size:0.75rem;color:#aaa;text-transform:none;">' + errDetail + '</span></div>';
         }
     );
 }
