@@ -267,6 +267,11 @@
                 <button type="button" class="btn-save" onclick="saveCMSConfig()">Guardar Alterações</button>
             </div>
 
+            <!-- Online / Local Notice Banner -->
+            <div id="admin-notice" style="display:none; background: rgba(255,200,50,0.08); border: 1px solid rgba(255,200,50,0.25); border-radius: 4px; padding: 1.2rem 1.5rem; margin-bottom: 2rem; font-size: 0.9rem; line-height: 1.6; color: #f5f0e8;">
+                <strong>💡 Como usar este painel:</strong> Para guardar alterações definitivas e trocar as fotos de capa no site online, deves abrir este painel no teu computador através do ficheiro <code>gerir-colecoes.bat</code> (em <code>http://localhost:8000/admin.html</code>). Depois de clicar em "Guardar", basta abrir o GitHub Desktop e dar <strong>Push</strong>!
+            </div>
+
             <!-- List of Collections to Edit -->
             <div class="collections-list" id="collections-edit-container">
                 <div style="color: var(--text-secondary); text-align: center; padding: 4rem;">
@@ -303,6 +308,13 @@
         let currentOverrides = {};
 
         document.addEventListener('DOMContentLoaded', async () => {
+            // Check if running on Vercel/online
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const notice = document.getElementById('admin-notice');
+            if (!isLocal && notice) {
+                notice.style.display = 'block';
+            }
+
             // Load custom metadata overrides if any
             try {
                 const response = await fetch('js/custom-metadata.json', { cache: 'no-cache' });
@@ -458,44 +470,54 @@
                 const coverSelect = document.getElementById(`cover-${colId}`);
 
                 if (titleInput && dateInput && coverSelect) {
-                    // Assemble override object
                     newOverrides[colId] = {
                         title: titleInput.value.trim(),
-                        date: new Date(dateInput.value).toISOString().substring(0, 19), // Format: YYYY-MM-DDTHH:mm:ss
+                        date: new Date(dateInput.value).toISOString().substring(0, 19),
                         cover: coverSelect.value
                     };
                 }
             });
 
-            // Post override config to Server API
+            const jsonStr = JSON.stringify(newOverrides, null, 4);
+
+            // Post override config to Server API if local
             try {
                 const response = await fetch('/api/save-config', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newOverrides, null, 4)
+                    body: jsonStr
                 });
 
                 if (response.ok) {
-                    showToast();
-                    
-                    // Reload data from regenerated collectionsData after brief delay
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                } else {
-                    alert('Erro ao guardar as alterações. Detalhes no servidor.');
+                    showToast('Alterações guardadas no computador! Abre o GitHub Desktop e dá Push para atualizar o site online.');
+                    setTimeout(() => window.location.reload(), 1500);
+                    return;
                 }
             } catch (err) {
-                alert('Erro ao ligar ao servidor local: ' + err.message);
+                // If not running local server (e.g. on Vercel), trigger download of custom-metadata.json
             }
+
+            // Fallback download if running directly on static host
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'custom-metadata.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('Configuração descarregada! Abre o gerir-colecoes.bat no teu computador para sincronizar.');
         }
 
-        function showToast() {
+        function showToast(msg) {
             const toast = document.getElementById('toast');
+            if (msg) toast.textContent = msg;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 4000);
         }
     </script>
 </body>

@@ -46,6 +46,13 @@ while ($listener.IsListening) {
             
             # Execute update-gallery.ps1 to compile new metadata database
             & powershell.exe -ExecutionPolicy Bypass -File (Join-Path $rootPath "update-gallery.ps1")
+
+            # Automatically synchronize with GitHub repository folder
+            $gitRepoDir = Join-Path (Split-Path $rootPath -Parent) "afonso-portfolio"
+            if (Test-Path $gitRepoDir) {
+                Copy-Item (Join-Path $rootPath "js\custom-metadata.json") (Join-Path $gitRepoDir "js\custom-metadata.json") -Force -ErrorAction SilentlyContinue
+                Copy-Item (Join-Path $rootPath "js\collections-data.js") (Join-Path $gitRepoDir "js\collections-data.js") -Force -ErrorAction SilentlyContinue
+            }
             
             $response.StatusCode = 200
             $successMsg = [System.Text.Encoding]::UTF8.GetBytes('{"success": true, "message": "Configuracao guardada com sucesso!"}')

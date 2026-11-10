@@ -430,6 +430,10 @@ function loadGLB() {
             window._linkGroups = linkGroups;
             scene.add(model);
 
+            if (typeof window.__updateLoaderProgress === 'function') {
+                window.__updateLoaderProgress(100);
+            }
+
             if (loaderEl) {
                 loaderEl.style.opacity = '0';
                 setTimeout(() => loaderEl.remove(), 600);
@@ -437,11 +441,12 @@ function loadGLB() {
         },
 
         (xhr) => {
-            if (xhr.total) {
-                const pct = Math.round((xhr.loaded / xhr.total) * 100);
-                if (typeof window.__updateLoaderProgress === 'function') {
-                    window.__updateLoaderProgress(pct);
-                }
+            // Se o servidor/Vercel Blob não expuser o Content-Length via CORS, xhr.total vem a 0.
+            // Usamos o tamanho real conhecido do modelo (284 MB = 284186044 bytes) como referência.
+            const total = (xhr.total && xhr.total > 0) ? xhr.total : 284186044;
+            const pct = Math.min(99, Math.max(1, Math.round((xhr.loaded / total) * 100)));
+            if (typeof window.__updateLoaderProgress === 'function') {
+                window.__updateLoaderProgress(pct);
             }
         },
 

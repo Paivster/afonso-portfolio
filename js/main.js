@@ -209,23 +209,11 @@ function renderSingleCollection() {
     photosCopy.forEach((photoObj, index) => {
         const photoPath = photoObj.path;
         const photoTitle = formatPhotoTitle(photoPath);
-        
-        // We simulate a price estimate based on photo position index
-        const basePrice = 45 + (index % 5) * 5;
 
         html += `
             <article class="gallery-mosaic-item" data-index="${index}" id="photo-${colId}-${index}">
                 <img src="${photoPath}" alt="${photoTitle}" loading="lazy">
-                <div class="gallery-mosaic-item-overlay">
-                    <span class="item-category">Impressão de Autor</span>
-                    <h2 class="item-title">${photoTitle}</h2>
-                    <div class="mosaic-item-actions">
-                        <button class="btn-inspect" aria-label="Analisar ${photoTitle}">Analisar Foto</button>
-                        <a href="#loja" class="btn-buy" aria-label="Comprar impressão de ${photoTitle} por €${basePrice}">
-                            Comprar — €${basePrice}
-                        </a>
-                    </div>
-                </div>
+                <div class="gallery-mosaic-item-overlay"></div>
             </article>
         `;
     });
@@ -292,7 +280,7 @@ function initLightbox() {
             if (e.target.closest('.btn-buy') || e.target.closest('.buy-print-link')) return;
 
             const img = newItem.querySelector('img');
-            const title = newItem.querySelector('.item-title').textContent;
+            const title = newItem.querySelector('.item-title')?.textContent || img.getAttribute('alt') || 'Fotografia';
             
             // Generate metadata description
             const imgSrc = img.getAttribute('src');
