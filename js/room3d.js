@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 3D Interactive Room â€” Afonso Portfolio (Award-Winning Showcase Edition)
  * Features:
  *  - 2-Spot Cinematic Navigation (SecretÃ¡ria & SofÃ¡)
@@ -93,23 +93,24 @@ const LINK_MAP = {
 };
 
 // Tooltip labels â€” first word / short title only
+// Tooltip labels - short title only
 const LINK_LABELS = {
     link_monitor1:          'Sobre Mim',
     link_monitor2:          'Redes Sociais',
-    link_quadrogrande:      'PortefÃ³lio â†—',
-    link_quadropequenocima: 'PortefÃ³lio â†—',
-    link_quadropequenobaixo:'PortefÃ³lio â†—',
-    link_quadromacmiller:   'Spotify â†—',
-    link_quadromadeira:     'PortefÃ³lio â†—',
+    link_quadrogrande:      'Portef\u00f3lio \u2192',
+    link_quadropequenocima: 'Portef\u00f3lio \u2192',
+    link_quadropequenobaixo:'Portef\u00f3lio \u2192',
+    link_quadromacmiller:   'Spotify \u2192',
+    link_quadromadeira:     'Portef\u00f3lio \u2192',
     link_camera1:           'O Meu Gear',
     link_camera2:           'O Meu Gear',
     link_camera3:           'O Meu Gear',
     link_files:             'CV & Trabalhos',
-    link_tv:                'Letterboxd â†—',
-    link_sofa:              'SofÃ¡ ðŸ›‹ï¸',
-    link_cadeira:           'SecretÃ¡ria ðŸ–¥ï¸',
-    link_secretaria:        'SecretÃ¡ria ðŸ–¥ï¸',
-    link_desk:              'SecretÃ¡ria ðŸ–¥ï¸',
+    link_tv:                'Letterboxd \u2192',
+    link_sofa:              'Sof\u00e1 \u2192',
+    link_cadeira:           'Secret\u00e1ria \u2192',
+    link_secretaria:        'Secret\u00e1ria \u2192',
+    link_desk:              'Secret\u00e1ria \u2192',
 };
 
 // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -174,7 +175,8 @@ function init3DRoom() {
     // 3. High-Fidelity Renderer Setup
     renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.25) : Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = false;
     renderer.toneMapping       = THREE.CineonToneMapping;
     renderer.toneMappingExposure = 1.42; // Slightly dialed back â€” bright but not washed
@@ -433,56 +435,91 @@ function loadGLB() {
             // -----------------------------------------------------------------
             // POST-LOAD MATERIAL & TEXTURE CORRECTIONS
             // -----------------------------------------------------------------
+            try {
+                // 1. BeerBottle: vidro verde escuro + rotulo vermelho e branco
+                model.traverse(function(node) {
+                    if (!node.isMesh) return;
+                    var nodeMats = Array.isArray(node.material) ? node.material : [node.material];
+                    var hasBeerMat = nodeMats.some(function(m) { return m && (m.name || '').toLowerCase().indexOf('beer') >= 0; });
+                    if (!hasBeerMat && node.name !== 'BeerBottle') return;
 
-            // 1. BeerBottle: vidro verde + rotulo visivel
-            model.traverse(function(node) {
-                if (!node.isMesh) return;
-                var nodeMats = Array.isArray(node.material) ? node.material : [node.material];
-                var hasBeerMat = nodeMats.some(function(m) { return m && (m.name || "").toLowerCase().indexOf("beer") >= 0; });
-                if (!hasBeerMat && node.name !== "BeerBottle") return;
-                nodeMats.forEach(function(mat) {
-                    if (!mat) return;
-                    var mn = (mat.name || "").toLowerCase();
-                    if (mn.indexOf("beerglass") >= 0) {
-                        mat.color.set(0x1e5520);
-                        mat.metalness = 0.0; mat.roughness = 0.06;
-                        mat.opacity = 0.75; mat.transparent = true; mat.transmission = 0;
-                        if (mat.emissive) { mat.emissive.set(0x0a1f0b); mat.emissiveIntensity = 0.25; }
-                        mat.needsUpdate = true;
-                    } else if (mn.indexOf("beerlabelinside") >= 0) {
-                        mat.transparent = false; mat.opacity = 1.0; mat.needsUpdate = true;
-                    } else if (mn.indexOf("beerlabel") >= 0) {
-                        mat.transparent = false; mat.opacity = 1.0; mat.metalness = 0.0; mat.roughness = 0.75;
-                        if (mat.emissive) { mat.emissive.set(0xffffff); mat.emissiveIntensity = 0.45; }
-                        mat.needsUpdate = true;
-                    } else if (mn.indexOf("beercap") >= 0) {
-                        mat.color.set(0xd0d0d0); mat.metalness = 0.9; mat.roughness = 0.2; mat.needsUpdate = true;
-                    }
-                });
-            });
-
-            // 2. link_quadroPequenoCima: foto rodada 90 graus (usa linkGroups)
-            var quadroGroup = linkGroups["link_quadropequenocima"];
-            if (quadroGroup) {
-                quadroGroup.traverse(function(child) {
-                    if (!child.isMesh) return;
-                    var qm = Array.isArray(child.material) ? child.material : [child.material];
-                    qm.forEach(function(mat) {
-                        if (mat && mat.map) { mat.map.center.set(0.5, 0.5); mat.map.rotation = Math.PI / 2; mat.map.needsUpdate = true; }
+                    nodeMats.forEach(function(mat) {
+                        if (!mat || !mat.name) return;
+                        var mn = mat.name.toLowerCase();
+                        if (mn.indexOf('beerglass') >= 0) {
+                            mat.color.set(0x0d3814); // verde escuro
+                            mat.metalness = 0.05;
+                            mat.roughness = 0.06;
+                            mat.opacity = 0.85;
+                            mat.transparent = true;
+                            if (mat.transmission !== undefined) mat.transmission = 0;
+                            mat.needsUpdate = true;
+                        } else if (mn.indexOf('beerlabelinside') >= 0) {
+                            mat.color.set(0x771111);
+                            mat.metalness = 0.0;
+                            mat.roughness = 0.5;
+                            mat.transparent = false;
+                            mat.opacity = 1.0;
+                            mat.needsUpdate = true;
+                        } else if (mn.indexOf('beerlabel') >= 0) {
+                            mat.color.set(0xbd1818); // rotulo vermelho vivo
+                            mat.metalness = 0.0;
+                            mat.roughness = 0.35;
+                            mat.transparent = false;
+                            mat.opacity = 1.0;
+                            mat.needsUpdate = true;
+                        } else if (mn.indexOf('beercap') >= 0) {
+                            mat.color.set(0xd8d8d8); // tampa metalica
+                            mat.metalness = 0.85;
+                            mat.roughness = 0.2;
+                            mat.needsUpdate = true;
+                        }
                     });
                 });
-            }
 
-            // 3. link_Monitor1: imagem demasiado para baixo (usa linkGroups)
-            var monitorGroup = linkGroups["link_monitor1"];
-            if (monitorGroup) {
-                monitorGroup.traverse(function(child) {
-                    if (!child.isMesh) return;
-                    var mm = Array.isArray(child.material) ? child.material : [child.material];
-                    mm.forEach(function(mat) {
-                        if (mat && mat.map) { mat.map.offset.set(0, 0.18); mat.map.needsUpdate = true; }
+                // 2. link_quadroPequenoCima: rodar foto 90 graus
+                var quadroNode = linkGroups['link_quadropequenocima'];
+                if (quadroNode) {
+                    quadroNode.traverse(function(child) {
+                        if (!child.isMesh) return;
+                        var qm = Array.isArray(child.material) ? child.material : [child.material];
+                        qm.forEach(function(mat) {
+                            if (!mat) return;
+                            var tex = mat.emissiveMap || mat.map;
+                            if (tex) {
+                                tex.center.set(0.5, 0.5);
+                                tex.rotation = -Math.PI / 2; // rodar 90 graus
+                                tex.matrixAutoUpdate = true;
+                                tex.updateMatrix();
+                                mat.needsUpdate = true;
+                            }
+                        });
                     });
-                });
+                }
+
+                // 3. link_Monitor1: subir imagem no monitor (nao ficar puxada para baixo)
+                var monitorNode = linkGroups['link_monitor1'];
+                if (monitorNode) {
+                    monitorNode.traverse(function(child) {
+                        if (!child.isMesh) return;
+                        var mm = Array.isArray(child.material) ? child.material : [child.material];
+                        mm.forEach(function(mat) {
+                            if (!mat) return;
+                            if (mat.name === 'MainMonitorScreen' && (mat.emissiveMap || mat.map)) {
+                                var tex = mat.emissiveMap || mat.map;
+                                tex.repeat.set(3.85, 4.10);
+                                tex.rotation = -1.570796;
+                                tex.center.set(0, 1);
+                                tex.offset.set(-4.10 + 0.35, 0.45);
+                                tex.matrixAutoUpdate = true;
+                                tex.updateMatrix();
+                                mat.needsUpdate = true;
+                            }
+                        });
+                    });
+                }
+            } catch (errPost) {
+                console.warn('Post-load correction notice:', errPost);
             }
             // -----------------------------------------------------------------
 
@@ -580,6 +617,7 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
+    if (e.cancelable) e.preventDefault();
     const t = e.touches[0];
     const fakeEvent = { clientX: t.clientX, clientY: t.clientY };
     onDragMove(fakeEvent);

@@ -72,7 +72,7 @@ while ($listener.IsListening) {
         $filePath = Join-Path $rootPath $relativePath
         
         if (Test-Path $filePath -PathType Leaf) {
-            $bytes = [System.IO.File]::ReadAllBytes($filePath)
+            $fileInfo = New-Object System.IO.FileInfo($filePath)
             
             # Content Type Mapping
             $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
@@ -86,24 +86,34 @@ while ($listener.IsListening) {
                 ".webp" { $response.ContentType = "image/webp" }
                 ".svg"  { $response.ContentType = "image/svg+xml" }
                 ".ico"  { $response.ContentType = "image/x-icon" }
+                ".glb"  { $response.ContentType = "model/gltf-binary" }
                 default { $response.ContentType = "application/octet-stream" }
             }
             
             # Add cache headers for development (prevent caching)
             $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
             $response.Headers.Add("Pragma", "no-cache")
+            $response.ContentLength64 = $fileInfo.Length
             
-            $response.ContentLength64 = $bytes.Length
-            $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            try {
+                $fileStream = [System.IO.File]::OpenRead($filePath)
+                $fileStream.CopyTo($response.OutputStream)
+                $fileStream.Close()
+            } catch {
+                # Ignore client abort during streaming
+            }
         } else {
             # File Not Found
             $response.StatusCode = 404
             $notFoundMsg = [System.Text.Encoding]::UTF8.GetBytes("<h1>404 Not Found</h1><p>File not found: $localPath</p>")
             $response.ContentType = "text/html; charset=utf-8"
             $response.ContentLength64 = $notFoundMsg.Length
-            $response.OutputStream.Write($notFoundMsg, 0, $notFoundMsg.Length)
+            try {
+                $response.OutputStream.Write($notFoundMsg, 0, $notFoundMsg.Length)
+            } catch {}
         }
-        $response.OutputStream.Close()
+        try { $response.OutputStream.Close() } catch {}
+        try { $response.Close() } catch {}
     } catch {
         # Catch unexpected client disconnects silently
     }
