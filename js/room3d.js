@@ -1,17 +1,17 @@
-/**
- * 3D Interactive Room — Afonso Portfolio (Award-Winning Showcase Edition)
+﻿/**
+ * 3D Interactive Room â€” Afonso Portfolio (Award-Winning Showcase Edition)
  * Features:
- *  - 2-Spot Cinematic Navigation (Secretária & Sofá)
+ *  - 2-Spot Cinematic Navigation (SecretÃ¡ria & SofÃ¡)
  *  - Butter-smooth camera rotation damping with physical momentum
  *  - Ultra-sharp Anisotropic 8x texture filtering
  *  - Dual interactive triggers: click the 3D Sofa directly OR the floor hotspots OR the bottom switcher
  *  - Rich, vibrant ACES Filmic lighting with soft ambient warmth
- *  - Glassmorphic tooltips with actionable hints (Spotify, Portefólio, Gear, Sobre Mim)
+ *  - Glassmorphic tooltips with actionable hints (Spotify, PortefÃ³lio, Gear, Sobre Mim)
  */
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  State & Spots Configuration
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let scene, camera, renderer, raycaster;
 let mouse        = new THREE.Vector2(-9999, -9999);
 let clock        = new THREE.Clock();
@@ -19,7 +19,7 @@ let interactives = []; // interactive link meshes
 let waypoints    = []; // floor waypoint markers
 let hoveredObj   = null;
 let isDragging   = false;
-let isPanelOpen  = false; // Global flag — blocks 3D interaction while an overlay panel is open
+let isPanelOpen  = false; // Global flag â€” blocks 3D interaction while an overlay panel is open
 let prevMouse    = { x: 0, y: 0 };
 
 // Spherical camera angles with butter-smooth damping
@@ -27,7 +27,7 @@ let yaw         = 0;
 let pitch       = 0;
 let targetYaw   = 0;
 let targetPitch = 0;
-const PITCH_LIMIT = Math.PI * 0.44; // ~80° up/down cap
+const PITCH_LIMIT = Math.PI * 0.44; // ~80Â° up/down cap
 const DRAG_SPEED  = 0.0032;
 const DAMPING     = 0.09; // Physical rotation momentum
 
@@ -35,14 +35,14 @@ const DAMPING     = 0.09; // Physical rotation momentum
 const SPOTS = {
     desk: {
         id: 'desk',
-        label: 'Secretária',
+        label: 'SecretÃ¡ria',
         pos: new THREE.Vector3(1.2239, 1.1712, 0.62816),
         yaw: 0,
         pitch: (90.861 - 90) * (Math.PI / 180) // ~0.015 rad (horizontal)
     },
     sofa: {
         id: 'sofa',
-        label: 'Sofá',
+        label: 'SofÃ¡',
         pos: new THREE.Vector3(-0.54699, 0.93483, -0.53729),
         yaw: (573.6 - 720) * (Math.PI / 180), // ~ -2.555 rad (framed across towards desk & room)
         pitch: (95.661 - 90) * (Math.PI / 180) // ~ 0.0988 rad (sitting angle)
@@ -59,9 +59,9 @@ let transitionStartYaw = 0, transitionEndYaw = 0;
 let transitionStartPitch = 0, transitionEndPitch = 0;
 const TRANSITION_DURATION = 1.25; // seconds for cinematic flight
 
-// ─────────────────────────────────────────────
-//  Link → destination map (lowercase keys)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Link â†’ destination map (lowercase keys)
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const LINK_MAP = {
     // Monitors
     link_monitor1: { type: 'overlay', panel: 'panel-about' },
@@ -74,15 +74,15 @@ const LINK_MAP = {
     link_quadromacmiller:    { type: 'external', url: 'https://open.spotify.com/user/1188973573?si=71e579738e2c4d2b' },
     link_quadromadeira:      { type: 'internal', url: 'galeria.html' },
 
-    // Cameras → Gear overlay
+    // Cameras â†’ Gear overlay
     link_camera1: { type: 'overlay', panel: 'panel-gear' },
     link_camera2: { type: 'overlay', panel: 'panel-gear' },
     link_camera3: { type: 'overlay', panel: 'panel-gear' },
 
-    // Files → CV & Academic work overlay
+    // Files â†’ CV & Academic work overlay
     link_files: { type: 'overlay', panel: 'panel-cv' },
 
-    // TV → Letterboxd
+    // TV â†’ Letterboxd
     link_tv: { type: 'external', url: 'https://letterboxd.com/Paivster/' },
 
     // Sofa Navigation
@@ -92,29 +92,29 @@ const LINK_MAP = {
     link_desk:       { type: 'spot', spotId: 'desk' },
 };
 
-// Tooltip labels — first word / short title only
+// Tooltip labels â€” first word / short title only
 const LINK_LABELS = {
     link_monitor1:          'Sobre Mim',
     link_monitor2:          'Redes Sociais',
-    link_quadrogrande:      'Portefólio ↗',
-    link_quadropequenocima: 'Portefólio ↗',
-    link_quadropequenobaixo:'Portefólio ↗',
-    link_quadromacmiller:   'Spotify ↗',
-    link_quadromadeira:     'Portefólio ↗',
+    link_quadrogrande:      'PortefÃ³lio â†—',
+    link_quadropequenocima: 'PortefÃ³lio â†—',
+    link_quadropequenobaixo:'PortefÃ³lio â†—',
+    link_quadromacmiller:   'Spotify â†—',
+    link_quadromadeira:     'PortefÃ³lio â†—',
     link_camera1:           'O Meu Gear',
     link_camera2:           'O Meu Gear',
     link_camera3:           'O Meu Gear',
     link_files:             'CV & Trabalhos',
-    link_tv:                'Letterboxd ↗',
-    link_sofa:              'Sofá 🛋️',
-    link_cadeira:           'Secretária 🖥️',
-    link_secretaria:        'Secretária 🖥️',
-    link_desk:              'Secretária 🖥️',
+    link_tv:                'Letterboxd â†—',
+    link_sofa:              'SofÃ¡ ðŸ›‹ï¸',
+    link_cadeira:           'SecretÃ¡ria ðŸ–¥ï¸',
+    link_secretaria:        'SecretÃ¡ria ðŸ–¥ï¸',
+    link_desk:              'SecretÃ¡ria ðŸ–¥ï¸',
 };
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Glassmorphic Tooltip
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const tooltip = document.createElement('div');
 Object.assign(tooltip.style, {
     position:              'fixed',
@@ -152,9 +152,9 @@ function hideTooltip() {
     tooltip.style.transform = 'translate(-50%, -125%) scale(0.96)';
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Main Init
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function init3DRoom() {
     const container = document.getElementById('room-3d-container');
     if (!container) return;
@@ -177,7 +177,7 @@ function init3DRoom() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = false;
     renderer.toneMapping       = THREE.CineonToneMapping;
-    renderer.toneMappingExposure = 1.42; // Slightly dialed back — bright but not washed
+    renderer.toneMappingExposure = 1.42; // Slightly dialed back â€” bright but not washed
     renderer.outputEncoding    = THREE.sRGBEncoding;
     container.appendChild(renderer.domElement);
 
@@ -205,20 +205,20 @@ function init3DRoom() {
 
     // Instructions hint
     const hint = document.getElementById('room-hint-text');
-    if (hint) hint.textContent = 'Arrasta para olhar 360° • Explora a sala e clica nos detalhes';
+    if (hint) hint.textContent = 'Arrasta para olhar 360Â° â€¢ Explora a sala e clica nos detalhes';
 
     animateLoop();
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Enhanced Ambient & Fill Lighting
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function setupEnhancedLighting() {
-    // 1. Ambient — slightly dialed back from 1.65
+    // 1. Ambient â€” slightly dialed back from 1.65
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.45);
     scene.add(ambientLight);
 
-    // 2. Hemisphere light — warm ceiling, cool floor bounce
+    // 2. Hemisphere light â€” warm ceiling, cool floor bounce
     const hemiLight = new THREE.HemisphereLight(0xfff8f0, 0x4a4a5a, 0.80);
     hemiLight.position.set(0, 5, 0);
     scene.add(hemiLight);
@@ -239,9 +239,9 @@ function setupEnhancedLighting() {
     scene.add(sideFill);
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Floor Waypoint Markers (Google Street View Style)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function createFloorWaypoints() {
     const ringGeo = new THREE.RingGeometry(0.20, 0.28, 48);
     const discGeo = new THREE.CircleGeometry(0.12, 48);
@@ -251,7 +251,7 @@ function createFloorWaypoints() {
     const sofaGroup = new THREE.Group();
     sofaGroup.position.set(SPOTS.sofa.pos.x, 0.05, SPOTS.sofa.pos.z);
     sofaGroup.rotation.x = -Math.PI / 2;
-    sofaGroup.userData = { isWaypoint: true, targetSpot: 'sofa', label: 'Sofá 🛋️' };
+    sofaGroup.userData = { isWaypoint: true, targetSpot: 'sofa', label: 'SofÃ¡ ðŸ›‹ï¸' };
 
     const sofaRingMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75, side: THREE.DoubleSide });
     const sofaRing = new THREE.Mesh(ringGeo, sofaRingMat);
@@ -271,7 +271,7 @@ function createFloorWaypoints() {
     const deskGroup = new THREE.Group();
     deskGroup.position.set(SPOTS.desk.pos.x, 0.05, SPOTS.desk.pos.z);
     deskGroup.rotation.x = -Math.PI / 2;
-    deskGroup.userData = { isWaypoint: true, targetSpot: 'desk', label: 'Secretária 🖥️' };
+    deskGroup.userData = { isWaypoint: true, targetSpot: 'desk', label: 'SecretÃ¡ria ðŸ–¥ï¸' };
 
     const deskRingMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75, side: THREE.DoubleSide });
     const deskRing = new THREE.Mesh(ringGeo, deskRingMat);
@@ -302,9 +302,9 @@ function updateWaypointsVisibility() {
     });
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Cinematic Camera Flight Transition
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function switchSpot(spotId) {
     if (isTransitioning || currentSpotId === spotId) return;
     const target = SPOTS[spotId];
@@ -340,9 +340,9 @@ function switchSpot(spotId) {
 }
 window.switchSpot = switchSpot;
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  GLB Loader with 8x Anisotropic Filtering
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function loadRoom() {
     if (typeof THREE.GLTFLoader === 'undefined') {
         const s = document.createElement('script');
@@ -430,71 +430,61 @@ function loadGLB() {
             window._linkGroups = linkGroups;
             scene.add(model);
 
-            // ─────────────────────────────────────────────────────────────────
+            // -----------------------------------------------------------------
             // POST-LOAD MATERIAL & TEXTURE CORRECTIONS
-            // ─────────────────────────────────────────────────────────────────
-            model.traverse((node) => {
+            // -----------------------------------------------------------------
+
+            // 1. BeerBottle: vidro verde + rotulo visivel
+            model.traverse(function(node) {
                 if (!node.isMesh) return;
-                const name = node.name || '';
-
-                // ── 1. BeerBottle: corrigir cor do vidro (fica cinzento sem envMap) ──
-                // Detectar pela mesh OU pelo nome do material (sub-meshes do grupo)
-                const nodeMats = Array.isArray(node.material) ? node.material : [node.material];
-                const hasBeerMat = nodeMats.some(m => m && (m.name || '').toLowerCase().includes('beer'));
-                if (name === 'BeerBottle' || hasBeerMat) {
-                    nodeMats.forEach(mat => {
-                        if (!mat) return;
-                        const matName = (mat.name || '').toLowerCase();
-
-                        if (matName.includes('beerglass')) {
-                            // Vidro verde escuro — desligar transmissão e simular com cor
-                            mat.color.set(0x1a3a1a);       // verde escuro
-                            mat.metalness   = 0.0;
-                            mat.roughness   = 0.08;
-                            mat.opacity     = 0.72;
-                            mat.transparent = true;
-                            mat.transmission = 0;           // desactivar transmissão física (precisa de envMap)
-                            mat.needsUpdate = true;
-                        } else if (matName.includes('beerlabel') && !matName.includes('inside')) {
-                            // Label exterior — garantir que é opaco e visível
-                            mat.transparent = false;
-                            mat.opacity     = 1.0;
-                            mat.metalness   = 0.0;
-                            mat.roughness   = 0.7;
-                            mat.needsUpdate = true;
-                        } else if (matName.includes('beercap')) {
-                            // Tampa metálica
-                            mat.metalness   = 0.8;
-                            mat.roughness   = 0.3;
-                            mat.needsUpdate = true;
-                        }
-                    });
-                }
-
-                // ── 2. link_quadroPequenoCima: foto rodada 90° ──
-                if (name.toLowerCase() === 'link_quadropequenocima') {
-                    const mats = Array.isArray(node.material) ? node.material : [node.material];
-                    mats.forEach(mat => {
-                        if (mat && mat.map) {
-                            mat.map.center.set(0.5, 0.5);
-                            mat.map.rotation = -Math.PI / 2;  // -90° (testar +90° se ficar ao contrário)
-                            mat.map.needsUpdate = true;
-                        }
-                    });
-                }
-
-                // ── 3. link_Monitor1: imagem demasiado para baixo ──
-                if (name.toLowerCase() === 'link_monitor1') {
-                    const mats = Array.isArray(node.material) ? node.material : [node.material];
-                    mats.forEach(mat => {
-                        if (mat && mat.map) {
-                            mat.map.offset.set(0, 0.18);   // subir a imagem (ajustar se necessário)
-                            mat.map.needsUpdate = true;
-                        }
-                    });
-                }
+                var nodeMats = Array.isArray(node.material) ? node.material : [node.material];
+                var hasBeerMat = nodeMats.some(function(m) { return m && (m.name || "").toLowerCase().indexOf("beer") >= 0; });
+                if (!hasBeerMat && node.name !== "BeerBottle") return;
+                nodeMats.forEach(function(mat) {
+                    if (!mat) return;
+                    var mn = (mat.name || "").toLowerCase();
+                    if (mn.indexOf("beerglass") >= 0) {
+                        mat.color.set(0x1e5520);
+                        mat.metalness = 0.0; mat.roughness = 0.06;
+                        mat.opacity = 0.75; mat.transparent = true; mat.transmission = 0;
+                        if (mat.emissive) { mat.emissive.set(0x0a1f0b); mat.emissiveIntensity = 0.25; }
+                        mat.needsUpdate = true;
+                    } else if (mn.indexOf("beerlabelinside") >= 0) {
+                        mat.transparent = false; mat.opacity = 1.0; mat.needsUpdate = true;
+                    } else if (mn.indexOf("beerlabel") >= 0) {
+                        mat.transparent = false; mat.opacity = 1.0; mat.metalness = 0.0; mat.roughness = 0.75;
+                        if (mat.emissive) { mat.emissive.set(0xffffff); mat.emissiveIntensity = 0.45; }
+                        mat.needsUpdate = true;
+                    } else if (mn.indexOf("beercap") >= 0) {
+                        mat.color.set(0xd0d0d0); mat.metalness = 0.9; mat.roughness = 0.2; mat.needsUpdate = true;
+                    }
+                });
             });
-            // ─────────────────────────────────────────────────────────────────
+
+            // 2. link_quadroPequenoCima: foto rodada 90 graus (usa linkGroups)
+            var quadroGroup = linkGroups["link_quadropequenocima"];
+            if (quadroGroup) {
+                quadroGroup.traverse(function(child) {
+                    if (!child.isMesh) return;
+                    var qm = Array.isArray(child.material) ? child.material : [child.material];
+                    qm.forEach(function(mat) {
+                        if (mat && mat.map) { mat.map.center.set(0.5, 0.5); mat.map.rotation = Math.PI / 2; mat.map.needsUpdate = true; }
+                    });
+                });
+            }
+
+            // 3. link_Monitor1: imagem demasiado para baixo (usa linkGroups)
+            var monitorGroup = linkGroups["link_monitor1"];
+            if (monitorGroup) {
+                monitorGroup.traverse(function(child) {
+                    if (!child.isMesh) return;
+                    var mm = Array.isArray(child.material) ? child.material : [child.material];
+                    mm.forEach(function(mat) {
+                        if (mat && mat.map) { mat.map.offset.set(0, 0.18); mat.map.needsUpdate = true; }
+                    });
+                });
+            }
+            // -----------------------------------------------------------------
 
             if (typeof window.__updateLoaderProgress === 'function') {
                 window.__updateLoaderProgress(100);
@@ -507,8 +497,8 @@ function loadGLB() {
         },
 
         (xhr) => {
-            // Se o servidor/Vercel Blob não expuser o Content-Length via CORS, xhr.total vem a 0.
-            // Usamos o tamanho real conhecido do novo modelo WebP (110.3 MB = 110323768 bytes) como referência.
+            // Se o servidor/Vercel Blob nÃ£o expuser o Content-Length via CORS, xhr.total vem a 0.
+            // Usamos o tamanho real conhecido do novo modelo WebP (110.3 MB = 110323768 bytes) como referÃªncia.
             const total = (xhr.total && xhr.total > 0) ? xhr.total : 110323768;
             const pct = Math.min(99, Math.max(1, Math.round((xhr.loaded / total) * 100)));
             if (typeof window.__updateLoaderProgress === 'function') {
@@ -534,9 +524,9 @@ function getLinkId(node) {
     return null;
 }
 
-// ─────────────────────────────────────────────
-//  Drag-to-look (360° with Smooth Momentum)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Drag-to-look (360Â° with Smooth Momentum)
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let dragStartX = 0, dragStartY = 0;
 let didDrag = false;
 
@@ -595,9 +585,9 @@ function onTouchMove(e) {
     onDragMove(fakeEvent);
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Click Handler (Objects, Sofa & Floor Waypoints)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function onClick(e) {
     if (didDrag || isTransitioning || isPanelOpen) return;
     if (!hoveredObj) return;
@@ -624,9 +614,9 @@ function onClick(e) {
     }
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Overlay Panels
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function openPanel(panelId) {
     const overlay = document.getElementById('panel-overlay');
     const panels  = document.querySelectorAll('.info-panel');
@@ -653,9 +643,9 @@ function closeAllPanels() {
 window.closeAllPanels = closeAllPanels;
 window.openPanel      = openPanel;
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Hover Glow Effect (Isolated to Selected Mesh Group)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function setGlow(linkId, on) {
     if (!linkId) return;
     const root = (window._linkGroups || {})[linkId.toLowerCase()];
@@ -712,9 +702,9 @@ function setGlow(linkId, on) {
     });
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Raycasting (Objects & Floor Waypoints)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function updateHover(mouseEvent) {
     if (isTransitioning || isPanelOpen) {
         hideTooltip();
@@ -787,18 +777,18 @@ function updateHover(mouseEvent) {
     }
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Camera apply look direction
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function applyCameraRotation() {
     const qYaw   = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
     const qPitch = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), pitch);
     camera.quaternion.copy(qYaw).multiply(qPitch);
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Resize
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function onResize() {
     const container = document.getElementById('room-3d-container');
     if (!container || !renderer) return;
@@ -807,9 +797,9 @@ function onResize() {
     renderer.setSize(container.clientWidth, container.clientHeight);
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Render loop
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let _lastMouseEvent = null;
 window.addEventListener('mousemove', e => { _lastMouseEvent = e; });
 
@@ -857,7 +847,8 @@ function animateLoop() {
     renderer.render(scene, camera);
 }
 
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 //  Export
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 window.init3DRoom = init3DRoom;
+
