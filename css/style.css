@@ -423,30 +423,31 @@ button {
 }
 
 /* ==========================================================================
-   GRID BASE — fotos em linhas (esquerda→direita), proporções naturais
+   CSS MOSAIC (MASONRY) GRID LAYOUT
    ========================================================================== */
 .gallery-mosaic {
+    column-count: 3;
+    column-gap: 1.5rem;
     width: 100%;
 }
 
-/* Fotos dentro de uma coleção (colecao.html) — grid em linhas, proporções livres */
+/* Fotos dentro de uma coleção — reset para coluna */
 #collection-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    align-items: start; /* cada foto mantém a sua altura natural */
+    column-count: 3;
+    column-gap: 1.5rem;
 }
 
 .gallery-mosaic-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
     position: relative;
     border-radius: var(--card-radius);
     overflow: hidden;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     cursor: pointer;
-    display: block;
+    display: inline-block;
     width: 100%;
-    margin-bottom: 0;
     transition: transform var(--transition-normal);
 }
 
@@ -682,16 +683,17 @@ button {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1.5rem;
     }
+    .gallery-mosaic,
     #collection-photos-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        column-count: 2;
+        column-gap: 1rem;
     }
 }
 
 @media (max-width: 576px) {
+    .gallery-mosaic,
     #collection-photos-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
+        column-count: 1;
     }
 }
 
@@ -745,9 +747,10 @@ button {
    COLLECTION CAPTION LAYOUT & SELECTORS
    ========================================================================== */
 .collection-card {
-    display: block;
+    display: inline-block;
     width: 100%;
-    margin-bottom: 0;
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
     cursor: pointer;
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -868,35 +871,42 @@ button {
 }
 
 #collections-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    align-items: start; /* cards ficam com altura natural, sem espaços em branco */
+    column-count: 4;
+    column-gap: 2rem;
 }
 
 #collections-grid .collection-card {
-    display: block; /* override do inline-block que causava espaços extra */
-    margin-bottom: 0;
+    margin-bottom: 2rem;
 }
 
 /* Adjust responsive spacing for smaller viewports */
 @media (max-width: 1024px) {
     #collections-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.2rem;
+        column-count: 3;
+        column-gap: 1.5rem;
+    }
+    #collections-grid .collection-card {
+        margin-bottom: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
     #collections-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        column-count: 2;
+        column-gap: 1.2rem;
+    }
+    #collections-grid .collection-card {
+        margin-bottom: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     #collections-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
+        column-count: 1;
+        column-gap: 0;
     }
+    #collections-grid .collection-card {
+        margin-bottom: 1rem;
+    }
+}
 }
