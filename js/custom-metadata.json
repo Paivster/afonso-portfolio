@@ -1,1 +1,87 @@
-﻿{}
+{
+    "CaboDaRoca": {
+        "title": "Cabo da Roca",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/CaboDaRoca/CaboDaRoca-9277.jpg"
+    },
+    "CampingCostaVicentina2025": {
+        "title": "Costa Vicentina Camping",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/CampingCostaVicentina2025/_DSC3418_Camping25.jpg"
+    },
+    "CampingGeres2026": {
+        "title": "Camping Geres2026",
+        "date": "2026-07-17T00:00:00",
+        "cover": "images/collections/CampingGeres2026/_DSC5317_CampingGeres.jpg"
+    },
+    "Cruise Norway 2024": {
+        "title": "Norway Cruise",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/Cruise Norway 2024/Cruzeiro2024-3150.jpg"
+    },
+    "EditedPasseioGracaBelem": {
+        "title": "Passeio GraÃ§a & BelÃ©m",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/EditedPasseioGracaBelem/GracaBelem-3905.jpg"
+    },
+    "EditedRome": {
+        "title": "Rome Recollections",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/EditedRome/Rome-6448.jpg"
+    },
+    "edited_passeio_02_06_2024": {
+        "title": "Lisbon Walk (June 2024)",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/edited_passeio_02_06_2024/random-0685.jpg"
+    },
+    "FotitasPasseiosAina": {
+        "title": "Portraits: Aina",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/FotitasPasseiosAina/Aina-8823.jpg"
+    },
+    "jun25": {
+        "title": "June 2025",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/jun25/_DSC2022_Jun25.jpg"
+    },
+    "London": {
+        "title": "London Streets",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/London/London_DSC6514.jpg"
+    },
+    "LostFiles_until_May2026": {
+        "title": "Lost Files (2026)",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/LostFiles_until_May2026/_DSC9956_Lost2026.jpg"
+    },
+    "Pariris": {
+        "title": "Paris: Collection I",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/Pariris/_DSC5286_Pariris.jpg"
+    },
+    "Pariris2": {
+        "title": "Paris: Collection II",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/Pariris2/_DSC7154_Pariris2.jpg"
+    },
+    "PasseioSofia": {
+        "title": "Portraits: Sofia",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/PasseioSofia/PasseioSofia-9552.jpg"
+    },
+    "Poland": {
+        "title": "Poland",
+        "date": "2026-05-24T00:00:00",
+        "cover": "images/collections/Poland/_DSC2959_Poland.jpg"
+    },
+    "PR": {
+        "title": "PR",
+        "date": "2026-07-30T00:00:00",
+        "cover": "images/collections/PR/_DSC6530_PR.jpg"
+    },
+    "Random": {
+        "title": "Random Moments",
+        "date": "2026-11-09T00:00:00",
+        "cover": "images/collections/Random/VW-9582.jpg"
+    }
+}
