@@ -819,7 +819,6 @@
                     showToast('Alterações guardadas com sucesso! O site foi atualizado.');
                     setTimeout(() => window.location.reload(), 1500);
                     return;
-                }
                 } else {
                     const errJson = await response.json().catch(() => ({}));
                     showToast('Erro ao guardar: ' + (errJson.error || 'Resposta de erro do servidor.'));
