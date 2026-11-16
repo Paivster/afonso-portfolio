@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Gestão | Afonso Photography</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css?v=admin1.1">
+    <link rel="stylesheet" href="css/style.css?v=admin1.2">
     <style>
         .admin-section {
             padding-top: 8rem;
@@ -668,7 +668,7 @@
             let gridHtml = '';
             col.photos.forEach(photo => {
                 const isActive = photo.path === currentCover ? 'active' : '';
-                gridHtml += `<div class="photo-card ${isActive}" onclick="selectCover('${photo.path}')"><img src="${photo.path}" alt="Foto" loading="lazy"><div class="photo-toggle-overlay">Selecionar</div></div>`;
+                gridHtml += `<div class="photo-card ${isActive}" style="position:relative;width:100%;height:140px;border-radius:8px;overflow:hidden;background:#000;display:block;" onclick="selectCover('${photo.path}')"><img src="${photo.path}" alt="Foto" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div class="photo-toggle-overlay">Selecionar</div></div>`;
             });
             grid.innerHTML = gridHtml;
             document.getElementById('cover-modal').style.display = 'flex';
@@ -707,8 +707,8 @@
                 const label = isHidden ? '✕ Ocultada' : '✓ Visível';
 
                 gridHtml += `
-                    <div class="photo-card ${cardClass}" onclick="togglePhotoVisibility('${colId}', '${photo.path}', this)">
-                        <img src="${photo.path}" alt="Foto" loading="lazy">
+                    <div class="photo-card ${cardClass}" style="position:relative;width:100%;height:140px;border-radius:8px;overflow:hidden;background:#000;display:block;" onclick="togglePhotoVisibility('${colId}', '${photo.path}', this)">
+                        <img src="${photo.path}" alt="Foto" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
                         <div class="photo-toggle-overlay">${label}</div>
                     </div>
                 `;
@@ -785,21 +785,16 @@
                     setTimeout(() => window.location.reload(), 1500);
                     return;
                 }
-            } catch (err) {}
-
-            const blob = new Blob([jsonStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'custom-metadata.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            showToast('Configuração descarregada! Abre o gerir-colecoes.bat para sincronizar.');
+                } else {
+                    const errJson = await response.json().catch(() => ({}));
+                    showToast('Erro ao guardar: ' + (errJson.error || 'Resposta de erro do servidor.'));
+                    return;
+                }
+            } catch (err) {
+                showToast('Erro de ligação ao guardar: ' + err.message);
+                return;
+            }
         }
-
         function showToast(msg) {
             const toast = document.getElementById('toast');
             if (msg) toast.textContent = msg;
