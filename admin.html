@@ -437,11 +437,13 @@
             <div class="auth-logo">Afonso Paiva<span>.</span></div>
             <p class="auth-desc">Acesso restrito ao Painel de Gestão</p>
             <div id="auth-form">
-                <input type="password" id="auth-password" class="auth-input" placeholder="••••••••••••" autofocus onkeydown="if(event.key==='Enter') handleLogin()">
+                <div style="position:relative;margin-bottom:1rem;">
+                    <input type="password" id="auth-password" class="auth-input" style="padding-right:2.8rem;margin-bottom:0;" placeholder="••••••••••••" autofocus onkeydown="if(event.key==='Enter') handleLogin()">
+                    <button type="button" id="toggle-pwd-btn" onclick="togglePasswordVisibility()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#888;cursor:pointer;font-size:1.1rem;padding:4px;display:flex;align-items:center;" title="Mostrar/Ocultar palavra-passe">👁</button>
+                </div>
                 <button type="button" class="auth-btn" onclick="handleLogin()">Entrar</button>
                 <div id="auth-error" class="auth-error">Palavra-passe incorreta. Tente novamente.</div>
             </div>
-        </div>
     </div>
 
     <!-- Floating Navigation Bar -->
@@ -528,6 +530,19 @@
             const buffer = new TextEncoder().encode(str);
             const digest = await crypto.subtle.digest('SHA-256', buffer);
             return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('auth-password');
+            const btn = document.getElementById('toggle-pwd-btn');
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                if (btn) btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                if (btn) btn.textContent = '👁';
+            }
         }
 
         function handleLogin() {
