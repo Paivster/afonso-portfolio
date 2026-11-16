@@ -436,90 +436,67 @@ function loadGLB() {
             // POST-LOAD MATERIAL & TEXTURE CORRECTIONS
             // -----------------------------------------------------------------
             try {
-                // 1. BeerBottle: vidro verde escuro + rotulo vermelho e branco
                 model.traverse(function(node) {
                     if (!node.isMesh) return;
-                    var nodeMats = Array.isArray(node.material) ? node.material : [node.material];
-                    var hasBeerMat = nodeMats.some(function(m) { return m && (m.name || '').toLowerCase().indexOf('beer') >= 0; });
-                    if (!hasBeerMat && node.name !== 'BeerBottle') return;
-
-                    nodeMats.forEach(function(mat) {
+                    var mats = Array.isArray(node.material) ? node.material : [node.material];
+                    mats.forEach(function(mat) {
                         if (!mat || !mat.name) return;
                         var mn = mat.name.toLowerCase();
+
+                        // --- BeerBottle ---
                         if (mn.indexOf('beerglass') >= 0) {
-                            mat.color.set(0x0d3814); // verde escuro
-                            mat.metalness = 0.05;
-                            mat.roughness = 0.06;
-                            mat.opacity = 0.85;
-                            mat.transparent = true;
+                            mat.color.set(0x1a4d20);
+                            mat.metalness  = 0.05; mat.roughness = 0.08;
+                            mat.opacity    = 0.82; mat.transparent = true;
                             if (mat.transmission !== undefined) mat.transmission = 0;
                             mat.needsUpdate = true;
                         } else if (mn.indexOf('beerlabelinside') >= 0) {
-                            mat.color.set(0x771111);
-                            mat.metalness = 0.0;
-                            mat.roughness = 0.5;
-                            mat.transparent = false;
-                            mat.opacity = 1.0;
+                            mat.color.set(0x661111);
+                            mat.metalness = 0; mat.roughness = 0.5;
+                            mat.transparent = false; mat.opacity = 1;
                             mat.needsUpdate = true;
                         } else if (mn.indexOf('beerlabel') >= 0) {
-                            mat.color.set(0xbd1818); // rotulo vermelho vivo
-                            mat.metalness = 0.0;
-                            mat.roughness = 0.35;
-                            mat.transparent = false;
-                            mat.opacity = 1.0;
+                            mat.color.set(0xcc2222);
+                            mat.metalness = 0; mat.roughness = 0.35;
+                            mat.transparent = false; mat.opacity = 1;
                             mat.needsUpdate = true;
                         } else if (mn.indexOf('beercap') >= 0) {
-                            mat.color.set(0xd8d8d8); // tampa metalica
-                            mat.metalness = 0.85;
-                            mat.roughness = 0.2;
+                            mat.color.set(0xd8d8d8);
+                            mat.metalness = 0.85; mat.roughness = 0.2;
                             mat.needsUpdate = true;
+
+                        // --- quadroPequenoCima: material TagusFrame ---
+                        // O GLB ja bake a rotation 1.5708 (90 graus) no KHR_texture_transform.
+                        // Nao alteramos a rotation, apenas desbloqueamos a matrix para
+                        // garantir que a textura renderiza corretamente apos o clone.
+                        } else if (mat.name === 'TagusFrame') {
+                            var tex = mat.emissiveMap || mat.map;
+                            if (tex) {
+                                // Nao alterar tex.rotation (valor baked do GLB e suficiente)
+                                tex.matrixAutoUpdate = true;
+                                tex.updateMatrix();
+                                mat.needsUpdate = true;
+                            }
+
+                        // --- Monitor1: material MainMonitorScreen ---
+                        // Ajustar offset para a imagem nao aparecer demasiado em baixo.
+                        } else if (mat.name === 'MainMonitorScreen') {
+                            var tex = mat.emissiveMap || mat.map;
+                            if (tex) {
+                                // Manter repeat e rotation do GLB; so ajustar offset vertical
+                                tex.repeat.set(3.85, 4.10);
+                                tex.rotation = 1.5707963; // valor baked do GLB
+                                tex.center.set(0, 1);
+                                tex.offset.set(-3.95, 0.72); // subir a imagem (+offset Y)
+                                tex.matrixAutoUpdate = true;
+                                tex.updateMatrix();
+                                mat.needsUpdate = true;
+                            }
                         }
                     });
                 });
-
-                // 2. link_quadroPequenoCima: rodar foto 90 graus
-                var quadroNode = linkGroups['link_quadropequenocima'];
-                if (quadroNode) {
-                    quadroNode.traverse(function(child) {
-                        if (!child.isMesh) return;
-                        var qm = Array.isArray(child.material) ? child.material : [child.material];
-                        qm.forEach(function(mat) {
-                            if (!mat) return;
-                            var tex = mat.emissiveMap || mat.map;
-                            if (tex) {
-                                tex.center.set(0.5, 0.5);
-                                tex.rotation = Math.PI / 2; // rodar 90 graus (direito)
-                                tex.matrixAutoUpdate = true;
-                                tex.updateMatrix();
-                                mat.needsUpdate = true;
-                            }
-                        });
-                    });
-                }
-
-                // 3. link_Monitor1: subir imagem no monitor (nao ficar puxada para baixo)
-                var monitorNode = linkGroups['link_monitor1'];
-                if (monitorNode) {
-                    monitorNode.traverse(function(child) {
-                        if (!child.isMesh) return;
-                        var mm = Array.isArray(child.material) ? child.material : [child.material];
-                        mm.forEach(function(mat) {
-                            if (!mat) return;
-                            if (mat.name === 'MainMonitorScreen' && (mat.emissiveMap || mat.map)) {
-                                var tex = mat.emissiveMap || mat.map;
-                                tex.repeat.set(3.85, 4.10);
-                                tex.rotation = 1.570796;
-                                tex.center.set(0, 1);
-                                tex.offset.set(-4.10 + 0.15, 0.45);
-                                tex.matrixAutoUpdate = true;
-                                tex.updateMatrix();
-                                mat.needsUpdate = true;
-                            }
-                        });
-                    });
-                }
             } catch (errPost) {
-                console.warn('Post-load correction notice:', errPost);
+                console.warn('Post-load fix error:', errPost);
             }
             // -----------------------------------------------------------------
 
