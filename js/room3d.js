@@ -363,7 +363,7 @@ function loadGLB() {
 
     const modelUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '8000')
         ? 'images/quartinho.glb'
-        : 'https://rcpc1nnbrntvtunq.public.blob.vercel-storage.com/Quartinho.glb';
+        : 'https://pub-dbaf3e2a209e4cbc896b42357366ca43.r2.dev/Quartinho.glb';
 
     loader.load(
         modelUrl,
