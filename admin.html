@@ -436,7 +436,7 @@
         <div class="auth-card">
             <div class="auth-logo">Afonso Paiva<span>.</span></div>
             <p class="auth-desc">Acesso restrito ao Painel de Gestão</p>
-            <form id="auth-form" onsubmit="handleLogin(event)">
+            <form id="auth-form" onsubmit="return handleLogin(event);">
                 <input type="password" id="auth-password" class="auth-input" placeholder="••••••••••••" autofocus required>
                 <button type="submit" class="auth-btn">Entrar</button>
                 <div id="auth-error" class="auth-error">Palavra-passe incorreta. Tente novamente.</div>
@@ -530,23 +530,42 @@
             return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        async function handleLogin(e) {
-            e.preventDefault();
+        function handleLogin(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const input = document.getElementById('auth-password');
             const err = document.getElementById('auth-error');
-            const val = (input.value || '').trim();
-            const hash = await sha256(val);
-            if (hash === AUTH_HASH || val === 'Afonso@Paiva#2026!Studio') {
-                sessionStorage.setItem('ap_admin_auth', 'true');
-                document.getElementById('auth-overlay').style.display = 'none';
-                err.style.display = 'none';
-            } else {
-                err.style.display = 'block';
-                input.value = '';
-                input.focus();
-            }
-        }
+            const val = (input ? input.value : '').trim();
 
+            if (val === 'Afonso@Paiva#2026!Studio') {
+                sessionStorage.setItem('ap_admin_auth', 'true');
+                const overlay = document.getElementById('auth-overlay');
+                if (overlay) overlay.style.display = 'none';
+                if (err) err.style.display = 'none';
+                return false;
+            }
+
+            sha256(val).then(hash => {
+                if (hash === AUTH_HASH) {
+                    sessionStorage.setItem('ap_admin_auth', 'true');
+                    const overlay = document.getElementById('auth-overlay');
+                    if (overlay) overlay.style.display = 'none';
+                    if (err) err.style.display = 'none';
+                } else {
+                    if (err) err.style.display = 'block';
+                    if (input) {
+                        input.value = '';
+                        input.focus();
+                    }
+                }
+            }).catch(() => {
+                if (err) err.style.display = 'block';
+            });
+
+            return false;
+        }
         function checkAuth() {
             if (sessionStorage.getItem('ap_admin_auth') === 'true') {
                 document.getElementById('auth-overlay').style.display = 'none';
