@@ -1,21 +1,21 @@
 let currentCustomMetadata = {};
-try {
-    fetch('js/custom-metadata.json', { cache: 'no-cache' })
-        .then(res => res.ok ? res.json() : {})
-        .then(data => { currentCustomMetadata = data; })
-        .catch(() => {});
-} catch(e) {}
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize navigation bar state
+
+async function loadMetadataAndRender() {
+    try {
+        const res = await fetch('js/custom-metadata.json', { cache: 'no-cache' });
+        if (res.ok) currentCustomMetadata = await res.json();
+    } catch(e) {}
+
     initNavigation();
-    
-    // Check which page we are on and boot the appropriate renderer
+
     if (document.getElementById('collections-grid')) {
         renderCollectionsIndex();
     } else if (document.getElementById('collection-photos-grid')) {
         renderSingleCollection();
     }
-});
+}
+
+document.addEventListener('DOMContentLoaded', loadMetadataAndRender);
 
 /* ==========================================================================
    NAVIGATION INTERACTIONS
@@ -113,23 +113,31 @@ function renderCollectionsIndex() {
     const sortBy = sortSelect ? sortSelect.value : 'date-desc';
     const keys = Object.keys(collectionsData);
     
-    // Sort collections array dynamically in the browser
+    // Sort collections array dynamically in the browser (using overrides where available)
     keys.sort((a, b) => {
         const colA = collectionsData[a];
         const colB = collectionsData[b];
+        const ovA = currentCustomMetadata[a] || {};
+        const ovB = currentCustomMetadata[b] || {};
+        const titleA = ovA.title || colA.title;
+        const titleB = ovB.title || colB.title;
+        const dateA = ovA.date || colA.date;
+        const dateB = ovB.date || colB.date;
+        const countA = colA.photos.filter(p => !(ovA.hiddenPhotos || []).includes(p.path)).length;
+        const countB = colB.photos.filter(p => !(ovB.hiddenPhotos || []).includes(p.path)).length;
 
         if (sortBy === 'name-asc') {
-            return colA.title.localeCompare(colB.title, 'pt', { sensitivity: 'base' });
+            return titleA.localeCompare(titleB, 'pt', { sensitivity: 'base' });
         } else if (sortBy === 'name-desc') {
-            return colB.title.localeCompare(colA.title, 'pt', { sensitivity: 'base' });
+            return titleB.localeCompare(titleA, 'pt', { sensitivity: 'base' });
         } else if (sortBy === 'date-desc') {
-            return new Date(colB.date) - new Date(colA.date);
+            return new Date(dateB) - new Date(dateA);
         } else if (sortBy === 'date-asc') {
-            return new Date(colA.date) - new Date(colB.date);
+            return new Date(dateA) - new Date(dateB);
         } else if (sortBy === 'size-desc') {
-            return colB.count - colA.count;
+            return countB - countA;
         } else if (sortBy === 'size-asc') {
-            return colA.count - colB.count;
+            return countA - countB;
         }
         return 0;
     });
@@ -148,17 +156,26 @@ function renderCollectionsIndex() {
 
     keys.forEach((key, index) => {
         const col = collectionsData[key];
+        const ov = currentCustomMetadata[key] || {};
+        const title = ov.title || col.title;
+        const cover = ov.cover || col.cover;
+        const dateStr = ov.date || col.date;
+        const dateLabel = col.friendlyDate ? (ov.date ? new Date(ov.date).toLocaleDateString('pt-PT', { month: 'long', year: 'numeric' }) : col.friendlyDate) : '';
+        // Count visible photos
+        const hiddenSet = new Set((ov.hiddenPhotos || []));
+        const visibleCount = col.photos.filter(p => !hiddenSet.has(p.path)).length;
+
         const cardHtml = `
             <article class="collection-card" onclick="location.href='colecao.html?id=${col.id}'" id="card-${col.id}">
                 <div class="collection-card-img">
-                    <img src="${col.cover}" alt="Capa da Coleção ${col.title}" loading="lazy">
+                    <img src="${cover}" alt="Capa da Coleção ${title}" loading="lazy">
                 </div>
                 <div class="collection-card-info">
                     <div class="collection-card-text">
-                        <h3 class="collection-card-title">${col.title}</h3>
-                        <span class="collection-card-date">${col.friendlyDate || ''}</span>
+                        <h3 class="collection-card-title">${title}</h3>
+                        <span class="collection-card-date">${dateLabel}</span>
                     </div>
-                    <span class="collection-card-meta">${col.count} fotos</span>
+                    <span class="collection-card-meta">${visibleCount} fotos</span>
                 </div>
             </article>
         `;
@@ -208,18 +225,22 @@ function renderSingleCollection() {
     }
 
     const col = collectionsData[colId];
+    const ov = currentCustomMetadata[colId] || {};
     
+    // Apply overrides: title, cover, hidden photos
+    const displayTitle = ov.title || col.title;
+
     // Check for custom metadata overrides (hidden photos)
     let activePhotos = col.photos;
-    if (typeof currentCustomMetadata !== 'undefined' && currentCustomMetadata[colId] && currentCustomMetadata[colId].hiddenPhotos) {
-        const hiddenSet = new Set(currentCustomMetadata[colId].hiddenPhotos);
+    if (ov.hiddenPhotos && ov.hiddenPhotos.length > 0) {
+        const hiddenSet = new Set(ov.hiddenPhotos);
         activePhotos = col.photos.filter(p => !hiddenSet.has(p.path));
     }
 
     // Set Header titles
-    titleEl.textContent = col.title;
+    titleEl.textContent = displayTitle;
     subtitleEl.textContent = `${activePhotos.length} fotografias nesta coleção`;
-    document.title = `${col.title} | Portfolio`;
+    document.title = `${displayTitle} | Portfolio`;
 
     // Bind event listener to sorting select box (only once)
     if (sortSelect && !sortSelect.dataset.listenerBound) {
