@@ -521,7 +521,7 @@ function loadGLB() {
         },
 
         (err) => {
-            console.error('GLB load error:', err);
+            console.error('GLB load error:', err); console.error('Stack:', err ? err.stack : 'none');
             const errDetail = (err && (err.message || err.statusText)) || 'Verifique a ligacao ou reinicie o servidor.';
             if (loaderEl) loaderEl.innerHTML = '<div style="color:#ff6b6b;font-family:sans-serif;padding:2rem;text-align:center;">Erro ao carregar a sala 3D.<br><span style="font-size:0.75rem;color:#aaa;text-transform:none;">' + errDetail + '</span></div>';
         }
