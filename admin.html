@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -14,18 +14,26 @@
         }
 
         .admin-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
         .admin-title {
             font-family: var(--font-heading);
             font-size: 2.25rem;
             font-weight: 300;
+        }
+
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .btn-save {
@@ -39,11 +47,30 @@
             letter-spacing: 0.1em;
             transition: all var(--transition-fast);
             border: 1px solid var(--text-primary);
+            cursor: pointer;
         }
 
         .btn-save:hover {
             background-color: transparent;
             color: var(--text-primary);
+        }
+
+        .btn-logout {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.8rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-logout:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
         }
 
         .collections-list {
@@ -102,7 +129,7 @@
             font-weight: 500;
         }
 
-        .form-input, .form-select {
+        .form-input {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
@@ -114,8 +141,243 @@
             transition: border-color var(--transition-fast);
         }
 
-        .form-input:focus, .form-select:focus {
+        .form-input:focus {
             border-color: var(--text-primary);
+        }
+
+        .btn-manage-photos {
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 500;
+        }
+
+        .btn-manage-photos:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .photo-status-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+        }
+
+        /* Lock Screen Overlay */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #09090b;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-card {
+            background: rgba(20, 20, 23, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+        }
+
+        .auth-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-logo span {
+            color: #d4af37;
+        }
+
+        .auth-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            background: #111114;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 0.9rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border-color var(--transition-fast);
+            text-align: center;
+            letter-spacing: 0.15em;
+        }
+
+        .auth-input:focus {
+            border-color: #ffffff;
+        }
+
+        .auth-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #09090b;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .auth-btn:hover {
+            background: #e4e4e7;
+        }
+
+        .auth-error {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Modal Overlay & Box styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(9, 9, 11, 0.88);
+            backdrop-filter: blur(10px);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background-color: #141418;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 850px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 400;
+        }
+
+        .modal-close-btn {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            overflow-y: auto;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .photo-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: #09090b;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+
+        .photo-card.hidden-photo img {
+            opacity: 0.25;
+            filter: grayscale(100%);
+        }
+
+        .photo-toggle-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 0.4rem;
+            font-size: 0.7rem;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .photo-card.active-photo .photo-toggle-overlay {
+            color: #4ade80;
+        }
+
+        .photo-card.hidden-photo .photo-toggle-overlay {
+            color: #f87171;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.03);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .toast-notification {
@@ -125,12 +387,11 @@
             background-color: #ffffff;
             color: #1a1a1a;
             padding: 1rem 2rem;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            font-family: var(--font-body);
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             font-size: 0.875rem;
             font-weight: 500;
-            z-index: 10000;
+            z-index: 100000;
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -156,92 +417,22 @@
                 grid-column: span 1;
             }
         }
-
-        /* Modal Overlay & Box styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(9, 9, 11, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 20000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-box {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-title {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            font-weight: 400;
-        }
-
-        .modal-close-btn {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .modal-close-btn:hover {
-            color: var(--text-primary);
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 0.75rem;
-            overflow-y: auto;
-            padding-top: 0.75rem;
-            margin-top: 0.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .modal-photo-item {
-            aspect-ratio: 1;
-            width: 100%;
-            object-fit: cover;
-            cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 4px;
-            transition: all var(--transition-fast);
-        }
-
-        .modal-photo-item:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: scale(1.02);
-        }
-
-        .modal-photo-item.active {
-            border-color: var(--text-primary);
-        }
     </style>
 </head>
 <body>
+
+    <!-- Lock Screen Authentication Overlay -->
+    <div id="auth-overlay">
+        <div class="auth-card">
+            <div class="auth-logo">Afonso Paiva<span>.</span></div>
+            <p class="auth-desc">Acesso restrito ao Painel de Gestão</p>
+            <form id="auth-form" onsubmit="handleLogin(event)">
+                <input type="password" id="auth-password" class="auth-input" placeholder="••••••••••••" autofocus required>
+                <button type="submit" class="auth-btn">Entrar</button>
+                <div id="auth-error" class="auth-error">Palavra-passe incorreta. Tente novamente.</div>
+            </form>
+        </div>
+    </div>
 
     <!-- Floating Navigation Bar -->
     <header class="header-nav" id="main-header" style="z-index: 10000;">
@@ -261,15 +452,18 @@
                 <div>
                     <h1 class="admin-title">Painel de Gestão</h1>
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.25rem;">
-                        Altere os nomes, datas e fotos de capa das suas coleções fotográficas.
+                        Altere os nomes, datas, fotos de capa e selecione que fotografias ficam visíveis ou ocultadas.
                     </p>
                 </div>
-                <button type="button" class="btn-save" onclick="saveCMSConfig()">Guardar Alterações</button>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveCMSConfig()">Guardar Alterações</button>
+                    <button type="button" class="btn-logout" onclick="logout()">Sair</button>
+                </div>
             </div>
 
             <!-- Online / Local Notice Banner -->
             <div id="admin-notice" style="display:none; background: rgba(255,200,50,0.08); border: 1px solid rgba(255,200,50,0.25); border-radius: 4px; padding: 1.2rem 1.5rem; margin-bottom: 2rem; font-size: 0.9rem; line-height: 1.6; color: #f5f0e8;">
-                <strong>💡 Como usar este painel:</strong> Para guardar alterações definitivas e trocar as fotos de capa no site online, deves abrir este painel no teu computador através do ficheiro <code>gerir-colecoes.bat</code> (em <code>http://localhost:8000/admin.html</code>). Depois de clicar em "Guardar", basta abrir o GitHub Desktop e dar <strong>Push</strong>!
+                <strong>💡 Modo Online:</strong> Ao clicar em "Guardar", é descarregado o ficheiro de configuração. No teu computador basta abrir <code>gerir-colecoes.bat</code> e dar Push no GitHub Desktop!
             </div>
 
             <!-- List of Collections to Edit -->
@@ -285,44 +479,92 @@
     <div id="cover-modal" class="modal-overlay" style="display: none;">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 class="modal-title">Selecionar Foto Principal</h3>
+                <h3 class="modal-title">Selecionar Foto de Capa</h3>
                 <button type="button" class="modal-close-btn" onclick="closeCoverSelector()">&times;</button>
             </div>
-            <p style="color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 0.5rem;">
-                Escolha uma imagem da coleção <span id="modal-col-title" style="color: var(--text-primary); font-weight: 500;"></span>:
+            <p style="color: var(--text-secondary); font-size: 0.8125rem;">
+                Escolha a foto principal para a coleção <span id="modal-col-title" style="color: var(--text-primary); font-weight: 500;"></span>:
             </p>
-            <div class="modal-grid" id="modal-photos-grid">
-                <!-- Dynamically populated grid of collection images -->
+            <div class="modal-grid" id="modal-photos-grid"></div>
+        </div>
+    </div>
+
+    <!-- Manage Photos Visibility Modal Window -->
+    <div id="photos-manage-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box" style="max-width: 950px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" id="manage-modal-title">Organizar Fotografias</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.25rem;">
+                        Clica em cada foto para alternar entre <strong>Visível</strong> e <strong>Ocultada</strong> no website.
+                    </p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closePhotosManager()">&times;</button>
             </div>
+            <div class="modal-grid" id="manage-photos-grid"></div>
         </div>
     </div>
 
     <!-- Toast Success Notification -->
-    <div id="toast" class="toast-notification">
-        Configurações guardadas e base de dados atualizada!
-    </div>
+    <div id="toast" class="toast-notification">Configurações guardadas!</div>
 
     <!-- Data registry -->
     <script src="js/collections-data.js"></script>
     <script>
+        // SHA-256 Hash of Password: "Afonso@Paiva#2026!Studio"
+        const AUTH_HASH = "1d16945eb63cb1b0fe86e325555998a512856e20548a744550591a9d86b7023a";
+
+        async function sha256(str) {
+            const buffer = new TextEncoder().encode(str);
+            const digest = await crypto.subtle.digest('SHA-256', buffer);
+            return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const input = document.getElementById('auth-password');
+            const err = document.getElementById('auth-error');
+            const hash = await sha256(input.value);
+            if (hash === AUTH_HASH) {
+                sessionStorage.setItem('ap_admin_auth', 'true');
+                document.getElementById('auth-overlay').style.display = 'none';
+                err.style.display = 'none';
+            } else {
+                err.style.display = 'block';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function checkAuth() {
+            if (sessionStorage.getItem('ap_admin_auth') === 'true') {
+                document.getElementById('auth-overlay').style.display = 'none';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('ap_admin_auth');
+            window.location.reload();
+        }
+
         let currentOverrides = {};
 
         document.addEventListener('DOMContentLoaded', async () => {
-            // Check if running on Vercel/online
+            checkAuth();
+
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             const notice = document.getElementById('admin-notice');
             if (!isLocal && notice) {
                 notice.style.display = 'block';
             }
 
-            // Load custom metadata overrides if any
             try {
                 const response = await fetch('js/custom-metadata.json', { cache: 'no-cache' });
                 if (response.ok) {
                     currentOverrides = await response.json();
                 }
             } catch (e) {
-                console.log("Nenhum ficheiro custom-metadata.json detetado ainda.");
+                console.log("Nenhum custom-metadata.json detetado ainda.");
             }
 
             renderCollectionsEditor();
@@ -333,11 +575,7 @@
             if (!container) return;
 
             if (typeof collectionsData === 'undefined' || Object.keys(collectionsData).length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; color: var(--text-secondary); padding: 4rem;">
-                        Nenhuma coleção encontrada na base de dados.
-                    </div>
-                `;
+                container.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 4rem;">Nenhuma coleção encontrada.</div>';
                 return;
             }
 
@@ -348,29 +586,16 @@
                 const col = collectionsData[key];
                 const override = currentOverrides[key] || {};
                 
-                // Set initial values
                 const currentTitle = override.title || col.title;
                 const currentCover = override.cover || col.cover;
+                const hiddenPhotos = override.hiddenPhotos || [];
+                const visibleCount = col.photos.length - hiddenPhotos.length;
                 
-                // Format date for the input element (YYYY-MM-DD)
                 const dateObj = new Date(override.date || col.date);
                 const year = dateObj.getFullYear();
                 const month = String(dateObj.getMonth() + 1).padStart(2, '0');
                 const day = String(dateObj.getDate()).padStart(2, '0');
                 const currentISODate = `${year}-${month}-${day}`;
-
-                // Build photos options for the cover selection visual picker
-                let thumbnailPickerHtml = '';
-                col.photos.forEach(photo => {
-                    const isActive = photo.path === currentCover ? 'active' : '';
-                    thumbnailPickerHtml += `
-                        <img src="${photo.path}" 
-                             alt="Foto da colecao" 
-                             class="thumbnail-picker-item ${isActive}" 
-                             onclick="selectCoverThumbnail('${col.id}', '${photo.path}', this)"
-                             loading="lazy">
-                    `;
-                });
 
                 html += `
                     <div class="collection-row" data-id="${col.id}">
@@ -383,24 +608,31 @@
                         </div>
                         
                         <div class="col-fields">
-                            <!-- Title Input -->
                             <div class="form-group col-span-2">
                                 <label class="form-label" for="title-${col.id}">Nome da Coleção</label>
-                                <input type="text" class="form-input" id="title-${col.id}" value="${currentTitle}" placeholder="Insira o nome da coleção">
+                                <input type="text" class="form-input" id="title-${col.id}" value="${currentTitle}" placeholder="Nome da coleção">
                             </div>
 
-                            <!-- Date Picker -->
                             <div class="form-group">
                                 <label class="form-label" for="date-${col.id}">Data da Coleção</label>
                                 <input type="date" class="form-input" id="date-${col.id}" value="${currentISODate}">
                             </div>
 
-                            <!-- Cover Image Picker Trigger Button -->
                             <div class="form-group">
-                                <label class="form-label">Selecionar Foto Principal</label>
+                                <label class="form-label">Foto de Capa</label>
                                 <input type="hidden" id="cover-${col.id}" value="${currentCover}">
                                 <button type="button" class="form-input" style="cursor: pointer; text-align: center; font-weight: 500;" onclick="openCoverSelector('${col.id}')">
-                                    Escolher Imagem...
+                                    Trocar Foto de Capa...
+                                </button>
+                            </div>
+
+                            <div class="form-group col-span-2">
+                                <label class="form-label">Visibilidade das Fotos (${visibleCount} visíveis, ${hiddenPhotos.length} ocultadas)</label>
+                                <button type="button" class="btn-manage-photos" onclick="openPhotosManager('${col.id}')">
+                                    <span>Gerir Fotografias da Coleção</span>
+                                    <span class="photo-status-badge" id="badge-${col.id}">
+                                        ${hiddenPhotos.length > 0 ? hiddenPhotos.length + ' Ocultadas' : 'Todas Visíveis'}
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -411,11 +643,11 @@
             container.innerHTML = html;
         }
 
-        let activeEditingColId = null;
+        let activeColId = null;
 
-        // Open modal cover selector and populate dynamic grid
+        // Cover Selector
         function openCoverSelector(colId) {
-            activeEditingColId = colId;
+            activeColId = colId;
             const col = collectionsData[colId];
             if (!col) return;
 
@@ -428,9 +660,9 @@
                 const isActive = photo.path === currentCover ? 'active' : '';
                 gridHtml += `
                     <img src="${photo.path}" 
-                         alt="Foto da colecao" 
-                         class="modal-photo-item ${isActive}" 
-                         onclick="selectCoverThumbnail('${photo.path}', this)"
+                         alt="Foto" 
+                         class="photo-card ${isActive}" 
+                         onclick="selectCover('${photo.path}')"
                          loading="lazy">
                 `;
             });
@@ -439,17 +671,14 @@
             document.getElementById('cover-modal').style.display = 'flex';
         }
 
-        // Close modal
         function closeCoverSelector() {
             document.getElementById('cover-modal').style.display = 'none';
         }
 
-        // Update selected cover image dynamically
-        function selectCoverThumbnail(photoPath, element) {
-            if (!activeEditingColId) return;
-
-            const input = document.getElementById(`cover-${activeEditingColId}`);
-            const img = document.getElementById(`preview-${activeEditingColId}`);
+        function selectCover(photoPath) {
+            if (!activeColId) return;
+            const input = document.getElementById(`cover-${activeColId}`);
+            const img = document.getElementById(`preview-${activeColId}`);
             if (input && img) {
                 input.value = photoPath;
                 img.src = photoPath;
@@ -457,11 +686,72 @@
             closeCoverSelector();
         }
 
-        // Build overrides payload and post to the PowerShell server API
+        // Photos Manager (Hide / Show photos)
+        function openPhotosManager(colId) {
+            activeColId = colId;
+            const col = collectionsData[colId];
+            if (!col) return;
+
+            document.getElementById('manage-modal-title').textContent = `Fotografias: ${col.title}`;
+            const grid = document.getElementById('manage-photos-grid');
+            const override = currentOverrides[colId] || {};
+            const hiddenPhotos = new Set(override.hiddenPhotos || []);
+
+            let gridHtml = '';
+            col.photos.forEach(photo => {
+                const isHidden = hiddenPhotos.has(photo.path);
+                const cardClass = isHidden ? 'hidden-photo' : 'active-photo';
+                const label = isHidden ? '✕ Ocultada' : '✓ Visível';
+
+                gridHtml += `
+                    <div class="photo-card ${cardClass}" onclick="togglePhotoVisibility('${colId}', '${photo.path}', this)">
+                        <img src="${photo.path}" alt="Foto" loading="lazy">
+                        <div class="photo-toggle-overlay">${label}</div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = gridHtml;
+            document.getElementById('photos-manage-modal').style.display = 'flex';
+        }
+
+        function closePhotosManager() {
+            document.getElementById('photos-manage-modal').style.display = 'none';
+        }
+
+        function togglePhotoVisibility(colId, photoPath, element) {
+            if (!currentOverrides[colId]) currentOverrides[colId] = {};
+            if (!currentOverrides[colId].hiddenPhotos) currentOverrides[colId].hiddenPhotos = [];
+
+            const list = currentOverrides[colId].hiddenPhotos;
+            const idx = list.indexOf(photoPath);
+
+            const overlay = element.querySelector('.photo-toggle-overlay');
+
+            if (idx >= 0) {
+                // Was hidden, make visible
+                list.splice(idx, 1);
+                element.classList.remove('hidden-photo');
+                element.classList.add('active-photo');
+                overlay.textContent = '✓ Visível';
+            } else {
+                // Was visible, make hidden
+                list.push(photoPath);
+                element.classList.remove('active-photo');
+                element.classList.add('hidden-photo');
+                overlay.textContent = '✕ Ocultada';
+            }
+
+            // Update badge on main card
+            const badge = document.getElementById(`badge-${colId}`);
+            if (badge) {
+                badge.textContent = list.length > 0 ? `${list.length} Ocultadas` : 'Todas Visíveis';
+            }
+        }
+
         async function saveCMSConfig() {
             const container = document.getElementById('collections-edit-container');
             const rows = container.querySelectorAll('.collection-row');
-            const newOverrides = {};
 
             rows.forEach(row => {
                 const colId = row.dataset.id;
@@ -469,18 +759,17 @@
                 const dateInput = document.getElementById(`date-${colId}`);
                 const coverSelect = document.getElementById(`cover-${colId}`);
 
+                if (!currentOverrides[colId]) currentOverrides[colId] = {};
+
                 if (titleInput && dateInput && coverSelect) {
-                    newOverrides[colId] = {
-                        title: titleInput.value.trim(),
-                        date: new Date(dateInput.value).toISOString().substring(0, 19),
-                        cover: coverSelect.value
-                    };
+                    currentOverrides[colId].title = titleInput.value.trim();
+                    currentOverrides[colId].date = new Date(dateInput.value).toISOString().substring(0, 19);
+                    currentOverrides[colId].cover = coverSelect.value;
                 }
             });
 
-            const jsonStr = JSON.stringify(newOverrides, null, 4);
+            const jsonStr = JSON.stringify(currentOverrides, null, 4);
 
-            // Post override config to Server API if local
             try {
                 const response = await fetch('/api/save-config', {
                     method: 'POST',
@@ -489,15 +778,12 @@
                 });
 
                 if (response.ok) {
-                    showToast('Alterações guardadas no computador! Abre o GitHub Desktop e dá Push para atualizar o site online.');
+                    showToast('Alterações guardadas com sucesso! O site foi atualizado.');
                     setTimeout(() => window.location.reload(), 1500);
                     return;
                 }
-            } catch (err) {
-                // If not running local server (e.g. on Vercel), trigger download of custom-metadata.json
-            }
+            } catch (err) {}
 
-            // Fallback download if running directly on static host
             const blob = new Blob([jsonStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -508,7 +794,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            showToast('Configuração descarregada! Abre o gerir-colecoes.bat no teu computador para sincronizar.');
+            showToast('Configuração descarregada! Abre o gerir-colecoes.bat para sincronizar.');
         }
 
         function showToast(msg) {

@@ -1,3 +1,10 @@
+let currentCustomMetadata = {};
+try {
+    fetch('js/custom-metadata.json', { cache: 'no-cache' })
+        .then(res => res.ok ? res.json() : {})
+        .then(data => { currentCustomMetadata = data; })
+        .catch(() => {});
+} catch(e) {}
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize navigation bar state
     initNavigation();
@@ -202,9 +209,16 @@ function renderSingleCollection() {
 
     const col = collectionsData[colId];
     
+    // Check for custom metadata overrides (hidden photos)
+    let activePhotos = col.photos;
+    if (typeof currentCustomMetadata !== 'undefined' && currentCustomMetadata[colId] && currentCustomMetadata[colId].hiddenPhotos) {
+        const hiddenSet = new Set(currentCustomMetadata[colId].hiddenPhotos);
+        activePhotos = col.photos.filter(p => !hiddenSet.has(p.path));
+    }
+
     // Set Header titles
     titleEl.textContent = col.title;
-    subtitleEl.textContent = `${col.count} fotografias registadas nesta coleção`;
+    subtitleEl.textContent = `${activePhotos.length} fotografias nesta coleção`;
     document.title = `${col.title} | Portfolio`;
 
     // Bind event listener to sorting select box (only once)
@@ -214,7 +228,7 @@ function renderSingleCollection() {
     }
 
     const sortBy = sortSelect ? sortSelect.value : 'name-asc';
-    const photosCopy = [...col.photos];
+    const photosCopy = [...activePhotos];
 
     // Sort photo items dynamically in the browser
     photosCopy.sort((a, b) => {

@@ -115,7 +115,16 @@ foreach ($col in $collections) {
     
     $photoObjects = @()
     
+    $hiddenList = @()
+    if ($override -and $override.hiddenPhotos) {
+        $hiddenList = @($override.hiddenPhotos)
+    }
+
     foreach ($img in $images) {
+        $relPath = "images/collections/$colName/$($img.Name)"
+        if ($hiddenList -contains $relPath -or $hiddenList -contains $img.Name) {
+            continue
+        }
         $shellFile = $shellFolder.ParseName($img.Name)
         $dateStr = $shellFolder.GetDetailsOf($shellFile, $dateIndex)
         
