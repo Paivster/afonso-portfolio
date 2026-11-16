@@ -316,31 +316,42 @@
         }
 
         .modal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 1rem;
-            overflow-y: auto;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            border-top: 1px solid var(--border-color);
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+            gap: 1.25rem !important;
+            overflow-y: auto !important;
+            max-height: 60vh !important;
+            padding: 1.25rem 0.5rem 2rem 0.5rem !important;
+            margin-top: 1rem !important;
+            border-top: 1px solid var(--border-color) !important;
         }
 
         .photo-card {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            background: #09090b;
+            position: relative !important;
+            width: 100% !important;
+            height: 140px !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            border: 2px solid rgba(255, 255, 255, 0.1) !important;
+            cursor: pointer !important;
+            transition: all var(--transition-fast) !important;
+            background: #000000 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+            display: block !important;
         }
 
         .photo-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+            transition: opacity 0.3s, transform 0.3s !important;
+        }
+
+        .photo-card.active {
+            border-color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4) !important;
+        }
         }
 
         .photo-card.hidden-photo img {
@@ -660,12 +671,12 @@
                 const isActive = photo.path === currentCover ? 'active' : '';
                 gridHtml += `
                     <img src="${photo.path}" 
-                         alt="Foto" 
-                         class="photo-card ${isActive}" 
-                         onclick="selectCover('${photo.path}')"
-                         loading="lazy">
-                `;
-            });
+
+                gridHtml += `<div class="photo-card ${isActive}" onclick="selectCover('${photo.path}')"><img src="${photo.path}" alt="Foto" loading="lazy"><div class="photo-toggle-overlay">Selecionar</div></div>`;
+
+
+
+
 
             grid.innerHTML = gridHtml;
             document.getElementById('cover-modal').style.display = 'flex';
