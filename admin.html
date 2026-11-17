@@ -817,8 +817,7 @@
                 });
 
                 if (response.ok) {
-                    showToast('Alterações guardadas com sucesso! O site foi atualizado.');
-                    setTimeout(() => window.location.reload(), 1500);
+                    showToast('✅ Guardado! O portfólio atualiza em ~1 min após o deploy do Vercel.');
                     return;
                 } else {
                     const errJson = await response.json().catch(() => ({}));
