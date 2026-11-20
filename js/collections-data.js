@@ -4667,5 +4667,667 @@ const collectionsData = {
                 "subcollectionTitle": "Motoclube (Outubro 2023)"
             }
         ]
+    },
+    "Poland": {
+        "id": "Poland",
+        "title": "Poland",
+        "cover": "images/collections/Poland/_DSC2959_Poland.webp",
+        "count": 38,
+        "date": "2026-10-04T13:57:54",
+        "friendlyDate": "4 de Outubro de 2026",
+        "photos": [
+            {
+                "path": "images/collections/Poland/_DSC2959_Poland.webp",
+                "date": "2026-10-04T13:57:54"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2896_Poland.webp",
+                "date": "2026-10-04T13:57:53"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2893_Poland.webp",
+                "date": "2026-10-04T13:57:52"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2884_Poland.webp",
+                "date": "2026-10-04T13:57:50"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2859_Poland.webp",
+                "date": "2026-10-04T13:57:49"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2876_Poland.webp",
+                "date": "2026-10-04T13:57:48"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2846_Poland.webp",
+                "date": "2026-10-04T13:57:46"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2852_Poland.webp",
+                "date": "2026-10-04T13:57:44"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2835_Poland.webp",
+                "date": "2026-10-04T13:57:43"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2806_Poland.webp",
+                "date": "2026-10-04T13:57:40"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2819_Poland.webp",
+                "date": "2026-10-04T13:57:40"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2801_Poland.webp",
+                "date": "2026-10-04T13:57:38"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2796_Poland.webp",
+                "date": "2026-10-04T13:57:37"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2773_Poland.webp",
+                "date": "2026-10-04T13:57:36"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2778_Poland.webp",
+                "date": "2026-10-04T13:57:35"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2767_Poland.webp",
+                "date": "2026-10-04T13:57:32"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2776_Poland.webp",
+                "date": "2026-10-04T13:57:32"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2759_Poland.webp",
+                "date": "2026-10-04T13:57:29"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2753_Poland.webp",
+                "date": "2026-10-04T13:57:28"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2755_Poland.webp",
+                "date": "2026-10-04T13:57:28"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2745_Poland.webp",
+                "date": "2026-10-04T13:57:25"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2720_Poland.webp",
+                "date": "2026-10-04T13:57:24"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2733_Poland.webp",
+                "date": "2026-10-04T13:57:23"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2719_Poland.webp",
+                "date": "2026-10-04T13:57:21"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2702_Poland.webp",
+                "date": "2026-10-04T13:57:20"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2708_Poland.webp",
+                "date": "2026-10-04T13:57:20"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2673_Poland.webp",
+                "date": "2026-10-04T13:57:17"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2656_Poland.webp",
+                "date": "2026-10-04T13:57:16"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2668_Poland.webp",
+                "date": "2026-10-04T13:57:15"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2640_Poland.webp",
+                "date": "2026-10-04T13:57:14"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2635_Poland.webp",
+                "date": "2026-10-04T13:57:12"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2622_Poland.webp",
+                "date": "2026-10-04T13:57:10"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2625_Poland.webp",
+                "date": "2026-10-04T13:57:09"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2604_Poland.webp",
+                "date": "2026-10-04T13:57:08"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2574_Poland.webp",
+                "date": "2026-10-04T13:57:07"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2596_Poland.webp",
+                "date": "2026-10-04T13:57:07"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2565_Poland.webp",
+                "date": "2026-10-04T13:57:03"
+            },
+            {
+                "path": "images/collections/Poland/_DSC2583_Poland.webp",
+                "date": "2026-10-04T13:57:03"
+            }
+        ]
+    },
+    "CampingGeres2026": {
+        "id": "CampingGeres2026",
+        "title": "Camping Gerês 2026",
+        "cover": "images/collections/CampingGeres2026/_DSC5428_CampingGeres.webp",
+        "count": 46,
+        "date": "2026-10-04T13:59:35",
+        "friendlyDate": "4 de Outubro de 2026",
+        "photos": [
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5428_CampingGeres.webp",
+                "date": "2026-10-04T13:59:35"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5389_CampingGeres.webp",
+                "date": "2026-10-04T13:59:34"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5384_CampingGeres.webp",
+                "date": "2026-10-04T13:59:33"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5353_CampingGeres.webp",
+                "date": "2026-10-04T13:59:31"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5358_CampingGeres.webp",
+                "date": "2026-10-04T13:59:31"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5342_CampingGeres.webp",
+                "date": "2026-10-04T13:59:28"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5346_CampingGeres.webp",
+                "date": "2026-10-04T13:59:28"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5317_CampingGeres.webp",
+                "date": "2026-10-04T13:59:27"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5312_CampingGeres.webp",
+                "date": "2026-10-04T13:59:25"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5272_CampingGeres.webp",
+                "date": "2026-10-04T13:59:24"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5155_CampingGeres.webp",
+                "date": "2026-10-04T13:59:21"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5206_CampingGeres.webp",
+                "date": "2026-10-04T13:59:21"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5142_CampingGeres.webp",
+                "date": "2026-10-04T13:59:18"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5047_CampingGeres.webp",
+                "date": "2026-10-04T13:59:17"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5052_CampingGeres.webp",
+                "date": "2026-10-04T13:59:17"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5042_CampingGeres.webp",
+                "date": "2026-10-04T13:59:15"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC5004_CampingGeres.webp",
+                "date": "2026-10-04T13:59:13"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4991_CampingGeres.webp",
+                "date": "2026-10-04T13:59:12"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4983_CampingGeres.webp",
+                "date": "2026-10-04T13:59:09"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4979_CampingGeres.webp",
+                "date": "2026-10-04T13:59:08"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4986_CampingGeres.webp",
+                "date": "2026-10-04T13:59:08"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4963_CampingGeres.webp",
+                "date": "2026-10-04T13:59:05"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4977_CampingGeres.webp",
+                "date": "2026-10-04T13:59:05"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4934_CampingGeres.webp",
+                "date": "2026-10-04T13:59:04"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4937_CampingGeres.webp",
+                "date": "2026-10-04T13:59:03"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4902_CampingGeres.webp",
+                "date": "2026-10-04T13:59:00"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4914_CampingGeres.webp",
+                "date": "2026-10-04T13:58:58"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4873_CampingGeres.webp",
+                "date": "2026-10-04T13:58:55"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4872_CampingGeres.webp",
+                "date": "2026-10-04T13:58:53"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4722_CampingGeres.webp",
+                "date": "2026-10-04T13:58:52"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4871_CampingGeres.webp",
+                "date": "2026-10-04T13:58:52"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4673_CampingGeres.webp",
+                "date": "2026-10-04T13:58:47"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4678_CampingGeres.webp",
+                "date": "2026-10-04T13:58:47"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4706_CampingGeres.webp",
+                "date": "2026-10-04T13:58:47"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4692_CampingGeres.webp",
+                "date": "2026-10-04T13:58:43"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4659_CampingGeres.webp",
+                "date": "2026-10-04T13:58:41"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4665_CampingGeres.webp",
+                "date": "2026-10-04T13:58:41"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4667_CampingGeres.webp",
+                "date": "2026-10-04T13:58:41"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4592_CampingGeres.webp",
+                "date": "2026-10-04T13:58:36"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4618_CampingGeres.webp",
+                "date": "2026-10-04T13:58:36"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4509_CampingGeres.webp",
+                "date": "2026-10-04T13:58:32"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4560_CampingGeres.webp",
+                "date": "2026-10-04T13:58:32"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4556_CampingGeres.webp",
+                "date": "2026-10-04T13:58:29"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4472_CampingGeres.webp",
+                "date": "2026-10-04T13:58:27"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4504_CampingGeres.webp",
+                "date": "2026-10-04T13:58:24"
+            },
+            {
+                "path": "images/collections/CampingGeres2026/_DSC4505_CampingGeres.webp",
+                "date": "2026-10-04T13:58:24"
+            }
+        ]
+    },
+    "PR": {
+        "id": "PR",
+        "title": "PR",
+        "cover": "images/collections/PR/_DSC6530_PR.webp",
+        "count": 74,
+        "date": "2026-10-04T14:02:01",
+        "friendlyDate": "4 de Outubro de 2026",
+        "photos": [
+            {
+                "path": "images/collections/PR/_DSC6530_PR.webp",
+                "date": "2026-10-04T14:02:01"
+            },
+            {
+                "path": "images/collections/PR/_DSC6519_PR.webp",
+                "date": "2026-10-04T14:01:59"
+            },
+            {
+                "path": "images/collections/PR/_DSC6488_PR.webp",
+                "date": "2026-10-04T14:01:58"
+            },
+            {
+                "path": "images/collections/PR/_DSC6487_PR.webp",
+                "date": "2026-10-04T14:01:57"
+            },
+            {
+                "path": "images/collections/PR/_DSC6473_PR.webp",
+                "date": "2026-10-04T14:01:55"
+            },
+            {
+                "path": "images/collections/PR/_DSC6422_PR.webp",
+                "date": "2026-10-04T14:01:53"
+            },
+            {
+                "path": "images/collections/PR/_DSC6382_PR.webp",
+                "date": "2026-10-04T14:01:52"
+            },
+            {
+                "path": "images/collections/PR/_DSC6351_PR.webp",
+                "date": "2026-10-04T14:01:48"
+            },
+            {
+                "path": "images/collections/PR/_DSC6360_PR.webp",
+                "date": "2026-10-04T14:01:48"
+            },
+            {
+                "path": "images/collections/PR/_DSC6355_PR.webp",
+                "date": "2026-10-04T14:01:47"
+            },
+            {
+                "path": "images/collections/PR/_DSC6343_PR.webp",
+                "date": "2026-10-04T14:01:44"
+            },
+            {
+                "path": "images/collections/PR/_DSC6346_PR.webp",
+                "date": "2026-10-04T14:01:44"
+            },
+            {
+                "path": "images/collections/PR/_DSC6347-Enhanced-NR_PR.webp",
+                "date": "2026-10-04T14:01:44"
+            },
+            {
+                "path": "images/collections/PR/_DSC6315_PR.webp",
+                "date": "2026-10-04T14:01:40"
+            },
+            {
+                "path": "images/collections/PR/_DSC6320_PR.webp",
+                "date": "2026-10-04T14:01:40"
+            },
+            {
+                "path": "images/collections/PR/_DSC6310_PR.webp",
+                "date": "2026-10-04T14:01:39"
+            },
+            {
+                "path": "images/collections/PR/_DSC6283_PR.webp",
+                "date": "2026-10-04T14:01:37"
+            },
+            {
+                "path": "images/collections/PR/_DSC6308_PR.webp",
+                "date": "2026-10-04T14:01:37"
+            },
+            {
+                "path": "images/collections/PR/_DSC6244_PR.webp",
+                "date": "2026-10-04T14:01:35"
+            },
+            {
+                "path": "images/collections/PR/_DSC6233_PR.webp",
+                "date": "2026-10-04T14:01:33"
+            },
+            {
+                "path": "images/collections/PR/_DSC6230_PR.webp",
+                "date": "2026-10-04T14:01:32"
+            },
+            {
+                "path": "images/collections/PR/_DSC6207_PR.webp",
+                "date": "2026-10-04T14:01:31"
+            },
+            {
+                "path": "images/collections/PR/_DSC6220-Enhanced-NR_PR.webp",
+                "date": "2026-10-04T14:01:30"
+            },
+            {
+                "path": "images/collections/PR/_DSC6186_PR.webp",
+                "date": "2026-10-04T14:01:28"
+            },
+            {
+                "path": "images/collections/PR/_DSC6174_PR.webp",
+                "date": "2026-10-04T14:01:27"
+            },
+            {
+                "path": "images/collections/PR/_DSC6193_PR.webp",
+                "date": "2026-10-04T14:01:27"
+            },
+            {
+                "path": "images/collections/PR/_DSC6163_PR.webp",
+                "date": "2026-10-04T14:01:23"
+            },
+            {
+                "path": "images/collections/PR/_DSC6172_PR.webp",
+                "date": "2026-10-04T14:01:23"
+            },
+            {
+                "path": "images/collections/PR/_DSC6160_PR.webp",
+                "date": "2026-10-04T14:01:20"
+            },
+            {
+                "path": "images/collections/PR/_DSC6123_PR.webp",
+                "date": "2026-10-04T14:01:19"
+            },
+            {
+                "path": "images/collections/PR/_DSC6102_PR.webp",
+                "date": "2026-10-04T14:01:17"
+            },
+            {
+                "path": "images/collections/PR/_DSC6104_PR.webp",
+                "date": "2026-10-04T14:01:16"
+            },
+            {
+                "path": "images/collections/PR/_DSC6092_PR.webp",
+                "date": "2026-10-04T14:01:15"
+            },
+            {
+                "path": "images/collections/PR/_DSC6071_PR.webp",
+                "date": "2026-10-04T14:01:13"
+            },
+            {
+                "path": "images/collections/PR/_DSC6074_PR.webp",
+                "date": "2026-10-04T14:01:13"
+            },
+            {
+                "path": "images/collections/PR/_DSC6068_PR.webp",
+                "date": "2026-10-04T14:01:10"
+            },
+            {
+                "path": "images/collections/PR/_DSC6032_PR.webp",
+                "date": "2026-10-04T14:01:09"
+            },
+            {
+                "path": "images/collections/PR/_DSC6046_PR.webp",
+                "date": "2026-10-04T14:01:09"
+            },
+            {
+                "path": "images/collections/PR/_DSC6013_PR.webp",
+                "date": "2026-10-04T14:01:06"
+            },
+            {
+                "path": "images/collections/PR/_DSC6019_PR.webp",
+                "date": "2026-10-04T14:01:06"
+            },
+            {
+                "path": "images/collections/PR/_DSC6011_PR.webp",
+                "date": "2026-10-04T14:01:04"
+            },
+            {
+                "path": "images/collections/PR/_DSC6004_PR.webp",
+                "date": "2026-10-04T14:01:02"
+            },
+            {
+                "path": "images/collections/PR/_DSC5999_PR.webp",
+                "date": "2026-10-04T14:01:01"
+            },
+            {
+                "path": "images/collections/PR/_DSC5973_PR.webp",
+                "date": "2026-10-04T14:01:00"
+            },
+            {
+                "path": "images/collections/PR/_DSC5959-Enhanced-NR_PR.webp",
+                "date": "2026-10-04T14:00:59"
+            },
+            {
+                "path": "images/collections/PR/_DSC5956_PR.webp",
+                "date": "2026-10-04T14:00:58"
+            },
+            {
+                "path": "images/collections/PR/_DSC5966_PR.webp",
+                "date": "2026-10-04T14:00:58"
+            },
+            {
+                "path": "images/collections/PR/_DSC5886_PR.webp",
+                "date": "2026-10-04T14:00:56"
+            },
+            {
+                "path": "images/collections/PR/_DSC5934-Enhanced-NR_PR.webp",
+                "date": "2026-10-04T14:00:54"
+            },
+            {
+                "path": "images/collections/PR/_DSC5852_PR.webp",
+                "date": "2026-10-04T14:00:52"
+            },
+            {
+                "path": "images/collections/PR/_DSC5866_PR.webp",
+                "date": "2026-10-04T14:00:52"
+            },
+            {
+                "path": "images/collections/PR/_DSC5869_PR.webp",
+                "date": "2026-10-04T14:00:52"
+            },
+            {
+                "path": "images/collections/PR/_DSC5744_PR.webp",
+                "date": "2026-10-04T14:00:48"
+            },
+            {
+                "path": "images/collections/PR/_DSC5770_PR.webp",
+                "date": "2026-10-04T14:00:48"
+            },
+            {
+                "path": "images/collections/PR/_DSC5840_PR.webp",
+                "date": "2026-10-04T14:00:48"
+            },
+            {
+                "path": "images/collections/PR/_DSC5700_PR.webp",
+                "date": "2026-10-04T14:00:44"
+            },
+            {
+                "path": "images/collections/PR/_DSC5719_PR.webp",
+                "date": "2026-10-04T14:00:43"
+            },
+            {
+                "path": "images/collections/PR/_DSC5741_PR.webp",
+                "date": "2026-10-04T14:00:43"
+            },
+            {
+                "path": "images/collections/PR/_DSC5654_PR.webp",
+                "date": "2026-10-04T14:00:39"
+            },
+            {
+                "path": "images/collections/PR/_DSC5692_PR.webp",
+                "date": "2026-10-04T14:00:39"
+            },
+            {
+                "path": "images/collections/PR/_DSC5697_PR.webp",
+                "date": "2026-10-04T14:00:39"
+            },
+            {
+                "path": "images/collections/PR/_DSC5646_PR.webp",
+                "date": "2026-10-04T14:00:35"
+            },
+            {
+                "path": "images/collections/PR/_DSC5669_PR.webp",
+                "date": "2026-10-04T14:00:34"
+            },
+            {
+                "path": "images/collections/PR/_DSC5635_PR.webp",
+                "date": "2026-10-04T14:00:32"
+            },
+            {
+                "path": "images/collections/PR/_DSC5628_PR.webp",
+                "date": "2026-10-04T14:00:31"
+            },
+            {
+                "path": "images/collections/PR/_DSC5606_PR.webp",
+                "date": "2026-10-04T14:00:30"
+            },
+            {
+                "path": "images/collections/PR/_DSC5625_PR.webp",
+                "date": "2026-10-04T14:00:30"
+            },
+            {
+                "path": "images/collections/PR/_DSC5602_PR.webp",
+                "date": "2026-10-04T14:00:27"
+            },
+            {
+                "path": "images/collections/PR/_DSC5543_PR.webp",
+                "date": "2026-10-04T14:00:26"
+            },
+            {
+                "path": "images/collections/PR/_DSC5588_PR.webp",
+                "date": "2026-10-04T14:00:26"
+            },
+            {
+                "path": "images/collections/PR/_DSC5567_PR.webp",
+                "date": "2026-10-04T14:00:25"
+            },
+            {
+                "path": "images/collections/PR/_DSC5500_PR.webp",
+                "date": "2026-10-04T14:00:22"
+            },
+            {
+                "path": "images/collections/PR/_DSC5520_PR.webp",
+                "date": "2026-10-04T14:00:21"
+            },
+            {
+                "path": "images/collections/PR/_DSC5523_PR.webp",
+                "date": "2026-10-04T14:00:21"
+            }
+        ]
     }
 };
