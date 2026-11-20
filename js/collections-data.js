@@ -5329,5 +5329,391 @@ const collectionsData = {
                 "date": "2026-10-04T14:00:21"
             }
         ]
+    },
+    "CampingCostaVicentina2025": {
+        "id": "CampingCostaVicentina2025",
+        "title": "Costa Vicentina Camping",
+        "cover": "images/collections/CampingCostaVicentina2025/_DSC4149_Camping25.webp",
+        "count": 94,
+        "date": "2026-01-30T22:13:17",
+        "friendlyDate": "30 de Janeiro de 2026",
+        "photos": [
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4149_Camping25.webp",
+                "date": "2026-01-30T22:13:17"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4085_Camping25.webp",
+                "date": "2026-01-30T22:13:16"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4084_Camping25.webp",
+                "date": "2026-01-30T22:13:15"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4096_Camping25.webp",
+                "date": "2026-01-30T22:13:15"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4035_Camping25.webp",
+                "date": "2026-01-30T22:13:12"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC4049_Camping25.webp",
+                "date": "2026-01-30T22:13:12"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3993_Camping25.webp",
+                "date": "2026-01-30T22:13:09"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3967_Camping25.webp",
+                "date": "2026-01-30T22:13:08"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3972_Camping25.webp",
+                "date": "2026-01-30T22:13:07"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3946_Camping25.webp",
+                "date": "2026-01-30T22:13:05"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3943_Camping25.webp",
+                "date": "2026-01-30T22:13:03"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3950_Camping25.webp",
+                "date": "2026-01-30T22:13:03"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3925_Camping25.webp",
+                "date": "2026-01-30T22:12:59"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3940_Camping25.webp",
+                "date": "2026-01-30T22:12:59"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3918_Camping25.webp",
+                "date": "2026-01-30T22:12:56"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3901_Camping25.webp",
+                "date": "2026-01-30T22:12:55"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3914_Camping25.webp",
+                "date": "2026-01-30T22:12:55"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3863_Camping25.webp",
+                "date": "2026-01-30T22:12:52"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3891_Camping25.webp",
+                "date": "2026-01-30T22:12:51"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3881_Camping25.webp",
+                "date": "2026-01-30T22:12:48"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3846_Camping25.webp",
+                "date": "2026-01-30T22:12:46"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3844_Camping25.webp",
+                "date": "2026-01-30T22:12:45"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3829_Camping25.webp",
+                "date": "2026-01-30T22:12:44"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3821_Camping25.webp",
+                "date": "2026-01-30T22:12:43"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3820_Camping25.webp",
+                "date": "2026-01-30T22:12:42"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3777_Camping25.webp",
+                "date": "2026-01-30T22:12:38"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3805_Camping25.webp",
+                "date": "2026-01-30T22:12:38"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3772_Camping25.webp",
+                "date": "2026-01-30T22:12:35"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3768_Camping25.webp",
+                "date": "2026-01-30T22:12:34"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3765_Camping25.webp",
+                "date": "2026-01-30T22:12:32"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3762_Camping25.webp",
+                "date": "2026-01-30T22:12:31"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3761_Camping25.webp",
+                "date": "2026-01-30T22:12:29"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3746_Camping25.webp",
+                "date": "2026-01-30T22:12:28"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3737_Camping25.webp",
+                "date": "2026-01-30T22:12:25"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3741_Camping25.webp",
+                "date": "2026-01-30T22:12:25"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3729_Camping25.webp",
+                "date": "2026-01-30T22:12:23"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3727_Camping25.webp",
+                "date": "2026-01-30T22:12:22"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3716_Camping25.webp",
+                "date": "2026-01-30T22:12:21"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3696_Camping25.webp",
+                "date": "2026-01-30T22:12:19"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3692_Camping25.webp",
+                "date": "2026-01-30T22:12:18"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3679_Camping25.webp",
+                "date": "2026-01-30T22:12:15"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3660_Camping25.webp",
+                "date": "2026-01-30T22:12:14"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3651_Camping25.webp",
+                "date": "2026-01-30T22:12:12"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3627_Camping25.webp",
+                "date": "2026-01-30T22:12:10"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3630_Camping25.webp",
+                "date": "2026-01-30T22:12:10"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3604_Camping25.webp",
+                "date": "2026-01-30T22:12:07"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3592_Camping25.webp",
+                "date": "2026-01-30T22:12:06"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3584_Camping25.webp",
+                "date": "2026-01-30T22:12:05"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3579_Camping25.webp",
+                "date": "2026-01-30T22:12:03"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3570_Camping25.webp",
+                "date": "2026-01-30T22:12:01"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3557_Camping25.webp",
+                "date": "2026-01-30T22:12:00"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3547_Camping25.webp",
+                "date": "2026-01-30T22:11:59"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3487_Camping25.webp",
+                "date": "2026-01-30T22:11:57"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3515_Camping25.webp",
+                "date": "2026-01-30T22:11:57"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3507_Camping25.webp",
+                "date": "2026-01-30T22:11:55"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3465_Camping25.webp",
+                "date": "2026-01-30T22:11:52"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3456_Camping25.webp",
+                "date": "2026-01-30T22:11:51"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3443_Camping25.webp",
+                "date": "2026-01-30T22:11:49"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3430_Camping25.webp",
+                "date": "2026-01-30T22:11:47"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3436_Camping25.webp",
+                "date": "2026-01-30T22:11:47"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3418_Camping25.webp",
+                "date": "2026-01-30T22:11:43"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3416_Camping25.webp",
+                "date": "2026-01-30T22:11:42"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3397_Camping25.webp",
+                "date": "2026-01-30T22:11:41"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3380_Camping25.webp",
+                "date": "2026-01-30T22:11:39"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3370_Camping25.webp",
+                "date": "2026-01-30T22:11:37"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3369_Camping25.webp",
+                "date": "2026-01-30T22:11:36"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3366_Camping25.webp",
+                "date": "2026-01-30T22:11:34"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3360_Camping25.webp",
+                "date": "2026-01-30T22:11:31"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3328_Camping25.webp",
+                "date": "2026-01-30T22:11:30"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3316_Camping25.webp",
+                "date": "2026-01-30T22:11:29"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3306_Camping25.webp",
+                "date": "2026-01-30T22:11:26"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3313_Camping25.webp",
+                "date": "2026-01-30T22:11:26"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3303_Camping25.webp",
+                "date": "2026-01-30T22:11:24"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3290_Camping25.webp",
+                "date": "2026-01-30T22:11:22"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3224_Camping25.webp",
+                "date": "2026-01-30T22:11:20"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3276_Camping25.webp",
+                "date": "2026-01-30T22:11:20"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3259_Camping25.webp",
+                "date": "2026-01-30T22:11:17"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3203_Camping25.webp",
+                "date": "2026-01-30T22:11:15"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3188_Camping25.webp",
+                "date": "2026-01-30T22:11:13"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3197_Camping25.webp",
+                "date": "2026-01-30T22:11:13"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3175_Camping25.webp",
+                "date": "2026-01-30T22:11:10"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3159_Camping25.webp",
+                "date": "2026-01-30T22:11:09"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3167_Camping25.webp",
+                "date": "2026-01-30T22:11:08"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3158_Camping25.webp",
+                "date": "2026-01-30T22:11:06"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3154_Camping25.webp",
+                "date": "2026-01-30T22:11:05"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3146_Camping25.webp",
+                "date": "2026-01-30T22:11:03"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3148_Camping25.webp",
+                "date": "2026-01-30T22:11:02"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3140_Camping25.webp",
+                "date": "2026-01-30T22:11:00"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3130_Camping25.webp",
+                "date": "2026-01-30T22:10:59"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3115_Camping25.webp",
+                "date": "2026-01-30T22:10:58"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3088_Camping25.webp",
+                "date": "2026-01-30T22:10:56"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3113_Camping25.webp",
+                "date": "2026-01-30T22:10:55"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3101_Camping25.webp",
+                "date": "2026-01-30T22:10:52"
+            },
+            {
+                "path": "images/collections/CampingCostaVicentina2025/_DSC3108_Camping25.webp",
+                "date": "2026-01-30T22:10:52"
+            }
+        ]
     }
 };
