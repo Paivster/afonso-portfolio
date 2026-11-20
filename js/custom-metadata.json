@@ -1,12 +1,12 @@
 {
     "PasseioLisboa2024": {
         "title": "Passeio em Lisboa (Junho 2024)",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-06-02T00:00:00",
         "cover": "images/collections/PasseioLisboa2024/random-0685.webp"
     },
     "CaboDaRoca": {
         "title": "Cabo da Roca",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-04-07T00:00:00",
         "cover": "images/collections/CaboDaRoca/CaboDaRoca-9224.webp"
     },
     "CruiseNorway2024": {
@@ -16,12 +16,12 @@
     },
     "CruzeiroItalia2022": {
         "title": "Cruzeiro Itália 2022",
-        "date": "1980-01-01T00:00:00",
-        "cover": "images/collections/CruzeiroItalia2022/_DSC7787.webp"
+        "date": "2022-08-01T00:00:00",
+        "cover": "images/collections/CruzeiroItalia2022/_DSC7242.webp"
     },
     "London": {
         "title": "London Streets",
-        "date": "1980-01-01T00:00:00",
+        "date": "2023-11-03T00:00:00",
         "cover": "images/collections/London/London_DSC5548.webp"
     },
     "LostFiles": {
@@ -31,52 +31,52 @@
     },
     "Madeira": {
         "title": "Ilha da Madeira",
-        "date": "1980-01-01T00:00:00",
+        "date": "2023-08-01T00:00:00",
         "cover": "images/collections/Madeira/_DSC4339-2x3.webp"
     },
     "Pariris": {
         "title": "Paris: Coleção I",
-        "date": "2025-09-19T00:00:00",
+        "date": "2025-09-10T00:00:00",
         "cover": "images/collections/Pariris/_DSC4833_Pariris.webp"
     },
     "Pariris2": {
         "title": "Paris: Coleção II",
-        "date": "2025-12-12T00:00:00",
+        "date": "2025-11-07T00:00:00",
         "cover": "images/collections/Pariris2/_DSC5616_Pariris2.webp"
     },
     "PasseioChen": {
         "title": "Passeio Chen",
-        "date": "2025-06-03T00:00:00",
+        "date": "2025-06-01T00:00:00",
         "cover": "images/collections/PasseioChen/_DSC0409_PasseioChen.webp"
     },
     "PasseioGracaBelem": {
         "title": "Passeio Graça & Belém",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-09-26T00:00:00",
         "cover": "images/collections/PasseioGracaBelem/GracaBelem-3699.webp"
     },
     "PasseioSofia": {
         "title": "Portraits: Sofia",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-05-06T00:00:00",
         "cover": "images/collections/PasseioSofia/PasseioSofia-9458.webp"
     },
     "PasseiosAina": {
         "title": "Portraits: Aina",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-02-28T00:00:00",
         "cover": "images/collections/PasseiosAina/Aina-8550.webp"
     },
     "PyroCaboRoca": {
         "title": "Pyro Cabo da Roca",
         "date": "2025-06-03T00:00:00",
-        "cover": "images/collections/PyroCaboRoca/_DSC0202_Pyro.webp"
+        "cover": "images/collections/PyroCaboRoca/_DSC0192_Pyro.webp"
     },
     "Random": {
         "title": "Random Moments",
-        "date": "1980-01-01T00:00:00",
+        "date": "2023-04-13T00:00:00",
         "cover": "images/collections/Random/IMG_0188.webp"
     },
     "RomeNewYear": {
         "title": "Rome Recollections",
-        "date": "1980-01-01T00:00:00",
+        "date": "2024-12-28T00:00:00",
         "cover": "images/collections/RomeNewYear/Rome-06315.webp"
     },
     "jun25": {
@@ -91,22 +91,22 @@
     },
     "Poland": {
         "title": "Poland",
-        "date": "2026-10-04T00:00:00",
+        "date": "2026-05-23T00:00:00",
         "cover": "images/collections/Poland/_DSC2753_Poland.webp"
     },
     "CampingGeres2026": {
         "title": "Camping Gerês 2026",
-        "date": "2026-10-04T00:00:00",
+        "date": "2026-07-13T00:00:00",
         "cover": "images/collections/CampingGeres2026/_DSC5353_CampingGeres.webp"
     },
     "PR": {
         "title": "PR",
-        "date": "2026-10-04T00:00:00",
+        "date": "2026-07-19T00:00:00",
         "cover": "images/collections/PR/_DSC5700_PR.webp"
     },
     "CampingCostaVicentina2025": {
         "title": "Costa Vicentina Camping",
-        "date": "2026-01-30T00:00:00",
+        "date": "2025-08-01T00:00:00",
         "cover": "images/collections/CampingCostaVicentina2025/_DSC3630_Camping25.webp"
     }
 }
