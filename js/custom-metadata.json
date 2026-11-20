@@ -12,7 +12,10 @@
     "CruiseNorway2024": {
         "title": "Norway Cruise",
         "date": "2024-08-11T00:00:00",
-        "cover": "images/collections/CruiseNorway2024/Cruzeiro2024-2930.webp"
+        "cover": "images/collections/CruiseNorway2024/Cruzeiro2024-2930.webp",
+        "hiddenPhotos": [
+            "images/collections/CruiseNorway2024/Cruzeiro2024-3142.webp"
+        ]
     },
     "CruzeiroItalia2022": {
         "title": "Cruzeiro Itália 2022",
@@ -27,7 +30,12 @@
     "LostFiles": {
         "title": "Lost Files (2026)",
         "date": "2026-05-19T00:00:00",
-        "cover": "images/collections/LostFiles/_DSC1904_Lost2026.webp"
+        "cover": "images/collections/LostFiles/_DSC1904_Lost2026.webp",
+        "hiddenPhotos": [
+            "images/collections/LostFiles/_DSC2125_Lost2026.webp",
+            "images/collections/LostFiles/_DSC1966_Lost2026.webp",
+            "images/collections/LostFiles/_DSC1930_Lost2026.webp"
+        ]
     },
     "Madeira": {
         "title": "Ilha da Madeira",
@@ -42,7 +50,12 @@
     "Pariris2": {
         "title": "Paris: Coleção II",
         "date": "2025-11-07T00:00:00",
-        "cover": "images/collections/Pariris2/_DSC5616_Pariris2.webp"
+        "cover": "images/collections/Pariris2/_DSC5616_Pariris2.webp",
+        "hiddenPhotos": [
+            "images/collections/Pariris2/_DSC6858_Pariris2.webp",
+            "images/collections/Pariris2/_DSC5606_Pariris2.webp",
+            "images/collections/Pariris2/_DSC5674_Pariris2.webp"
+        ]
     },
     "PasseioChen": {
         "title": "Passeio Chen",
@@ -57,7 +70,10 @@
     "PasseioSofia": {
         "title": "Portraits: Sofia",
         "date": "2024-05-06T00:00:00",
-        "cover": "images/collections/PasseioSofia/PasseioSofia-9458.webp"
+        "cover": "images/collections/PasseioSofia/PasseioSofia-9458.webp",
+        "hiddenPhotos": [
+            "images/collections/PasseioSofia/PasseioSofia-9521.webp"
+        ]
     },
     "PasseiosAina": {
         "title": "Portraits: Aina",
@@ -82,7 +98,14 @@
     "jun25": {
         "title": "June 2025",
         "date": "2025-07-08T00:00:00",
-        "cover": "images/collections/jun25/_DSC2022_Jun25.webp"
+        "cover": "images/collections/jun25/_DSC2022_Jun25.webp",
+        "hiddenPhotos": [
+            "images/collections/jun25/_DSC2015_Jun25.webp",
+            "images/collections/jun25/_DSC1983_Jun25.webp",
+            "images/collections/jun25/_DSC1965_Jun25.webp",
+            "images/collections/jun25/_DSC1531_Jun25.webp",
+            "images/collections/jun25/_DSC1532_Jun25.webp"
+        ]
     },
     "Tagus": {
         "title": "Tagus",
@@ -97,7 +120,13 @@
     "CampingGeres2026": {
         "title": "Camping Gerês 2026",
         "date": "2026-07-13T00:00:00",
-        "cover": "images/collections/CampingGeres2026/_DSC5353_CampingGeres.webp"
+        "cover": "images/collections/CampingGeres2026/_DSC5353_CampingGeres.webp",
+        "hiddenPhotos": [
+            "images/collections/CampingGeres2026/_DSC4505_CampingGeres.webp",
+            "images/collections/CampingGeres2026/_DSC4706_CampingGeres.webp",
+            "images/collections/CampingGeres2026/_DSC4873_CampingGeres.webp",
+            "images/collections/CampingGeres2026/_DSC4871_CampingGeres.webp"
+        ]
     },
     "PR": {
         "title": "PR",
