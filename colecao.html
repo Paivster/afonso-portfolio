@@ -30,6 +30,62 @@
         .back-link:hover svg {
             transform: translateX(-4px);
         }
+
+        /* Subcollection Events Navigation */
+        .subcol-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            margin: 1.75rem 0 2.5rem 0;
+            padding: 0.5rem;
+        }
+
+        .subcol-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-secondary);
+            padding: 0.55rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+
+        .subcol-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .subcol-btn.active {
+            background: #ffffff;
+            color: #09090b;
+            border-color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .subcol-count-badge {
+            font-size: 0.75rem;
+            opacity: 0.75;
+            background: rgba(0, 0, 0, 0.25);
+            color: inherit;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+        }
+
+        .subcol-btn.active .subcol-count-badge {
+            background: rgba(0, 0, 0, 0.1);
+            color: #09090b;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +129,9 @@
                     <h1 class="section-title" id="collection-title">Carregar Coleção...</h1>
                     <p class="section-subtitle" id="collection-subtitle">A carregar fotos...</p>
                 </div>
+
+                <!-- Subcollection / Events Filter Container -->
+                <div id="subcollection-filter-container" class="subcol-container" style="display: none;"></div>
 
                 <!-- Controls (Sorting) -->
                 <div class="controls-container" id="collection-controls">

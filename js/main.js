@@ -204,12 +204,27 @@ function renderCollectionsIndex() {
     }
 }
 
+let currentSubcolFilter = null;
+
+window.filterSubcollection = function(subId) {
+    currentSubcolFilter = subId;
+    const url = new URL(window.location.href);
+    if (subId) {
+        url.searchParams.set('event', subId);
+    } else {
+        url.searchParams.delete('event');
+    }
+    window.history.replaceState({}, '', url);
+    renderSingleCollection();
+};
+
 // 2. Render Single Collection (colecao.html)
 function renderSingleCollection() {
     const grid = document.getElementById('collection-photos-grid');
     const titleEl = document.getElementById('collection-title');
     const subtitleEl = document.getElementById('collection-subtitle');
     const sortSelect = document.getElementById('photo-sort-select');
+    const subFilterContainer = document.getElementById('subcollection-filter-container');
     
     if (!grid || !titleEl || !subtitleEl) return;
 
@@ -221,6 +236,7 @@ function renderSingleCollection() {
         titleEl.textContent = 'Coleção não encontrada';
         subtitleEl.textContent = 'A coleção solicitada não existe ou foi removida.';
         grid.innerHTML = '';
+        if (subFilterContainer) subFilterContainer.style.display = 'none';
         return;
     }
 
@@ -237,10 +253,53 @@ function renderSingleCollection() {
         activePhotos = col.photos.filter(p => !hiddenSet.has(p.path));
     }
 
-    // Set Header titles
+    // Set Header title
     titleEl.textContent = displayTitle;
-    subtitleEl.textContent = `${activePhotos.length} fotografias nesta coleção`;
     document.title = `${displayTitle} | Portfolio`;
+
+    // Handle Subcollections / Events tabs (e.g. Tagus events)
+    if (col.subcollections && col.subcollections.length > 0 && subFilterContainer) {
+        // Read initial event filter from URL if not already selected
+        if (currentSubcolFilter === null) {
+            currentSubcolFilter = params.get('event') || null;
+        }
+
+        subFilterContainer.style.display = 'flex';
+        let subHtml = `
+            <button type="button" class="subcol-btn ${!currentSubcolFilter ? 'active' : ''}" onclick="filterSubcollection(null)">
+                Todos os Eventos <span class="subcol-count-badge">${activePhotos.length}</span>
+            </button>
+        `;
+
+        col.subcollections.forEach(sub => {
+            const countInSub = activePhotos.filter(p => p.subcollection === sub.id).length;
+            const isActive = currentSubcolFilter === sub.id ? 'active' : '';
+            subHtml += `
+                <button type="button" class="subcol-btn ${isActive}" onclick="filterSubcollection('${sub.id}')">
+                    ${sub.title} <span class="subcol-count-badge">${countInSub}</span>
+                </button>
+            `;
+        });
+
+        subFilterContainer.innerHTML = subHtml;
+
+        // Apply filter to photos if an event is active
+        if (currentSubcolFilter) {
+            const selectedSubObj = col.subcollections.find(s => s.id === currentSubcolFilter);
+            if (selectedSubObj) {
+                activePhotos = activePhotos.filter(p => p.subcollection === currentSubcolFilter);
+                subtitleEl.textContent = `${activePhotos.length} fotografias em ${selectedSubObj.title}`;
+            } else {
+                currentSubcolFilter = null;
+                subtitleEl.textContent = `${activePhotos.length} fotografias em todos os eventos`;
+            }
+        } else {
+            subtitleEl.textContent = `${activePhotos.length} fotografias em todos os eventos`;
+        }
+    } else {
+        if (subFilterContainer) subFilterContainer.style.display = 'none';
+        subtitleEl.textContent = `${activePhotos.length} fotografias nesta coleção`;
+    }
 
     // Bind event listener to sorting select box (only once)
     if (sortSelect && !sortSelect.dataset.listenerBound) {
